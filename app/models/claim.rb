@@ -1,5 +1,6 @@
 class Claim < ActiveRecord::Base
 	validates_presence_of :member_id, :rate, :points
+  attr_accessible :transaction_hash, :transaction_status
   belongs_to :user, foreign_key: 'member_id'
 
   def enqueue
