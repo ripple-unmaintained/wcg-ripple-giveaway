@@ -7,9 +7,7 @@ class User < ActiveRecord::Base
   	claimed_points = claims.sum(:points)
   	if (difference = total_points - claimed_points) > 0
       claim = Claim.create(points: difference, member_id: self.member_id)
-  	end
-  	if claim
-      # push claim into queue
+      claim.enqueue
   	end
   end
 end

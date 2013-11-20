@@ -1,11 +1,6 @@
-def process_points
+task :process_points, environment: true do
   Wcg.get_team.each do |member|
-    if (user = User.where(member_id: member_id)).empty?
-      user = User.create(member_id: member_id)
-    end
-    claim = user.process_points
-    if claim
-      # Push the claim into the queue for processing
-    end
+    user = User.find_or_create_by(member_id: member_id))
+    user.process_points(member['stats']['Points'])
   end
 end
