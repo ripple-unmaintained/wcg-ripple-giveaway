@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  member_id: MyString
+  verification_code: MyString
+  eligible: false
+  valid: false
+  points_claimed: MyString
+
+two:
+  username: MyString
+  member_id: MyString
+  verification_code: MyString
+  eligible: false
+  valid: false
+  points_claimed: MyString

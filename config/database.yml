@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: wcg_giveaway_development
+  pool: 5
+  host: localhost
+  post: 5432

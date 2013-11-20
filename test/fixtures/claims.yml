@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member_id: 1
+  rate: 1
+  points: 1
+  xrp_disbursed: 1
+  transaction_hash: MyString
+  transaction_status: MyString
+
+two:
+  member_id: 1
+  rate: 1
+  points: 1
+  xrp_disbursed: 1
+  transaction_hash: MyString
+  transaction_status: MyString
