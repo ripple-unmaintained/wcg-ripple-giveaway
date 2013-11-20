@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :member_id
+  validates_presence_of :member_id, :ripple_address, :verification_code
   has_many :claims
 
   def process_points(total_points)

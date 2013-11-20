@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20131120200134) do
 
   create_table "users", id: false, force: true do |t|
     t.string   "username"
+    t.string   "ripple_address"
     t.integer  "member_id",         limit: 8
     t.string   "verification_code"
     t.boolean  "eligible"
-    t.boolean  "valid"
     t.integer  "points_claimed",    limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
