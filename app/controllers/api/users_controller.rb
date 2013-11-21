@@ -7,6 +7,7 @@ class Api::UsersController < ApplicationController
   	})
 
     if user.errors.messages.empty?
+      session[:user] = { member_id: user.member_id, username: user.username }
       render json: { user: user.attributes }
     else
       render json: { error: user.errors }
