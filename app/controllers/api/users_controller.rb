@@ -1,16 +1,15 @@
 class Api::UsersController < ApplicationController
   def create
-  	user = User.create({
+  	user = User.create_from_username({
   	  ripple_address: params[:ripple_address],
-      member_id: params[:member_id],
       username: params[:username],
       verification_code: params[:verification_code]
   	})
 
-    if !user.valid?
-      render json: { error: JSON.parse(user.errors.to_json) }
+    if user.errors.messages.empty?
+      render json: { user: user.attributes }
     else
-      render json: user
+      render json: { error: user.errors }
     end
   end
 
@@ -19,7 +18,8 @@ class Api::UsersController < ApplicationController
     claims = Claim.where(member_id: user.member_id)
     render json: {
       user: user.to_json,
-      claims: claims.to_json
+      claims: claims.to_json,
+      stats: Wcg.get_team_member(user.member_id)
     }
   end
 end

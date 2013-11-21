@@ -2,11 +2,20 @@ require 'ripple'
 
 class User < ActiveRecord::Base
   # add funded boolean
-  validates_presence_of :member_id, :ripple_address, :verification_code
-  validates_uniqueness_of :ripple_address, :member_id
+  validates_presence_of :member_id, :ripple_address
+  validates_uniqueness_of :member_id
   validate :member_of_ripple_team
-  validate :valid_ripple_address
+  #validate :valid_ripple_address
   has_many :claims
+
+  def self.create_from_username(params)
+    if (user = Wcg.verify_user(params[:username], params[:verification_code]))
+      create({ ripple_address: params[:ripple_address],
+        member_id: user[:member_id],
+        username: user[:username]
+      })
+    end
+  end
 
   def process_points(total_points)
     claims = Claim.where(member_id: self.member_id)
@@ -18,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def member_of_ripple_team
-    if false
+    if Wcg.get_team_member(self.username)
       errors.add(:member_id, "must be on the ripple team")
     end
   end

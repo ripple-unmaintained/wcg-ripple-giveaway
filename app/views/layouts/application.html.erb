@@ -3,16 +3,11 @@
 <html lang="en-US" class="no-animation animation-effects-enabled js no-flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-
 <!-- Meta Tags -->
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <!-- Mobile Specifics -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <!-- Mobile Internet Explorer ClearType Technology -->
 <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
 
@@ -186,4 +181,5 @@ var theme_objects = {"base":"http:\/\/localhost:8888\/ripplelabs.com\/wcg_giveaw
 			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
 		}());
 	</script>
+  <%= javascript_include_tag "application" %>
 </body></html>

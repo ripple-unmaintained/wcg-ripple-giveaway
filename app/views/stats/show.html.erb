@@ -1,0 +1,11 @@
+<h1>My stats</h1>
+
+<script>
+  $ = jQuery;
+  $(function () {
+    $.getJSON('/api/stats', function(data) {
+      console.log('stats');
+      console.log(data);
+    })
+  });
+</script>

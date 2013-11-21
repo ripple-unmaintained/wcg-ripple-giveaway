@@ -8,6 +8,22 @@ module Wcg
       end
   	end
 
+    def verify_user(username, verification_code)
+      username = URI.escape(username)
+      url = "https://secure.worldcommunitygrid.org/verifyMember.do?name=#{username}&code=#{verification_code}"
+      response = HTTParty.get(url).parsed_response
+      if response['Error']
+        false
+      else
+        { member_id: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['MemberId'],
+          username: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['Name'] }
+      end
+    end
+
+    def get_team_member(name)
+      get_team.select { |member| member['name'] == name }[0]
+    end
+
   private
     def total_team_members
       doc = Nokogiri::HTML(open team_url(1, 50, false))
@@ -35,7 +51,6 @@ module Wcg
 
     def parse_member_stats(member_xml)
       stats = member_xml.elements.select {|el| el.name == "StatisticsTotals" }[0]
-      puts stats.children.map &:name
       stats = stats.children.map {|child| { child.name.to_sym => child.text.strip } }
       stats.select! {|st| st.keys[0].to_s.strip != "text" }
     end

@@ -11,3 +11,34 @@
 // about supported directives.
 //
 //= require_tree .
+//= require_self
+
+$ = jQuery;
+
+$(function () {
+  $('#newUserForm').on('submit', function (e) {
+    e.preventDefault();
+    function onNewUserError (response) {
+      console.log('error');
+      console.log(response);
+    }
+    function onNewUserCreated (response) {
+      console.log('user created');
+      console.log(response);
+    }
+    $.ajax({
+      method: 'post',
+      url: '/api/users',
+      type: 'json',
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.error) {
+          onNewUserError(response);
+        } else {
+          onNewUserCreated(response);
+        }
+      },
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    })
+  });
+});
