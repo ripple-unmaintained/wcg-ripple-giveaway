@@ -63,14 +63,17 @@ Ripple Public Address
 <br>
 <input type="text" name="ripple_address" value="" size="40" aria-required="true">
 </p>
+<p class='errors' id='rippleAddressErrors'>Please enter a valid ripple public address</p>
 
 <p>
 <a style="color:#818B92; cursor:default;" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/setup/#" data-toggle="tooltip" data-placement="right" data-original-title="">
 WCG Username
 </a>
+
 <br>
 <input type="text" name="username" size="40" aria-required="true">
 </p>
+<p class='errors' id='wcgUsernameErrors'></p>
 
 <p>
 <a style="color:#818B92; cursor:default;" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/setup/#" data-toggle="tooltip" data-placement="right" data-original-title="Go to your WCG profile, copy your verification code, and paste it here.">
@@ -79,6 +82,8 @@ WCG Verification Code
 <br>
 <input type="text" name="verification_code" value="" size="40" aria-required="true">
 </p>
+<p class='errors' id='wcgVerificationCodeErrors'></p>
+
 		</div> 
 	</div> <div class="blank_divider" style="height: 15px;"></div>
 <input type='submit' class="button-main button-large animated-content fade_in animate" value='Start Claiming XRP'></input>

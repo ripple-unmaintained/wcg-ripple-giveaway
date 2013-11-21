@@ -19,8 +19,18 @@ $(function () {
   $('#newUserForm').on('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
-      console.log('error');
       console.log(response);
+      if (response.error && response.error.member_id && response.error.member_id.length > 0) {
+        $('#wcgUsernameErrors').text('username ' + response.error.member_id[0]).show();
+      } else {
+        $('#wcgUsernameErrors').hide();
+      }
+
+      if (response.error && response.error.ripple_address && response.error.ripple_address.length > 0) {
+        $('#rippleAddressErrors').text('ripple public address ' + response.error.ripple_address[0]).show();
+      } else {
+        $('#rippleAddressErrors').hide();
+      }
     }
     function onNewUserCreated (response) {
       console.log('user created');
@@ -36,6 +46,30 @@ $(function () {
           onNewUserError(response);
         } else {
           onNewUserCreated(response);
+        }
+      },
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    })
+  });
+
+  $('#signInForm').on('submit', function (e) {
+    e.preventDefault();
+    function onError (response) {
+      $('#loginErrors').show();
+    }
+    function onSuccess (response) {
+      document.location.href='/my-stats';
+    }
+    $.ajax({
+      method: 'post',
+      url: '/api/sessions',
+      type: 'json',
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.error) {
+          onError(response);
+        } else {
+          onSuccess(response);
         }
       },
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},

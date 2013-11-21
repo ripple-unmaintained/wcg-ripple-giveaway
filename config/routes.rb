@@ -2,6 +2,8 @@ WcgGiveaway::Application.routes.draw do
   namespace :api do
   	resources :users, only: :create
   	resources :stats, only: :index
+    resources :sessions, only: :create
+    get 'session', to: 'sessions#show'
   end
 
   get 'register', to: 'users#new'
@@ -9,7 +11,6 @@ WcgGiveaway::Application.routes.draw do
 
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
-  post 'sessions', to: 'sessions#create'
 
   root to: 'application#index'
 end
