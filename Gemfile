@@ -10,6 +10,9 @@ gem 'aws-sdk'
 gem 'ripple_lib_rpc_ruby', github: 'stevenzeiler/ripple-lib-rpc-ruby'
 gem 'pg'
 
+# A concurrent web server is recommended for heroku
+gem 'unicorn'
+
 # Heroku requires logs to be streamed to STDOUT, this gem does that
 group :production do
   gem 'rails_12factor'
