@@ -4,7 +4,7 @@ class Claim < ActiveRecord::Base
 
   def enqueue
   	# if < 50 xrp && > 8 hours && !funded then push 50
-    Queue.push({
+    PaymentRequestsQueue.push({
       unique_id: self.id,
       ripple_address: self.user.ripple_address,
       xrp_amount: self.points / self.rate

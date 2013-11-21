@@ -24,7 +24,7 @@ $(function () {
     }
     function onNewUserCreated (response) {
       console.log('user created');
-      console.log(response);
+      document.location.href='/my-stats';
     }
     $.ajax({
       method: 'post',
