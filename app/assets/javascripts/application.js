@@ -31,6 +31,12 @@ $(function () {
       } else {
         $('#rippleAddressErrors').hide();
       }
+
+      if (response.error && response.error.verification_code && response.error.verification_code.length > 0) {
+        $('#wcgVerificationCodeErrors').text('WCG verification code ' + response.error.verification_code[0]).show();
+      } else {
+        $('#wcgVerificationCodeErrors').hide();
+      }
     }
     function onNewUserCreated (response) {
       console.log('user created');

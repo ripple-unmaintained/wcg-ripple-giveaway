@@ -9,12 +9,16 @@ class User < ActiveRecord::Base
   has_many :claims
 
   def self.create_from_username(params)
-    if (user = Wcg.verify_user(params[:username], params[:verification_code]))
-      create({ ripple_address: params[:ripple_address],
-        member_id: user[:member_id],
-        username: user[:username]
-      })
+    user = new({ ripple_address: params[:ripple_address],
+      username: params[:username]
+    })
+    if !(wcg_user = Wcg.verify_user(params[:username], params[:verification_code]))
+      user.errors.add(:verification_code, "does not match the WCG username")
+    else
+      user.member_id = wcg_user[:member_id]
+      user.save
     end
+    user
   end
 
   def process_points(total_points)
