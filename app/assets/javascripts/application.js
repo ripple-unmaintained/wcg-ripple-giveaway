@@ -42,20 +42,28 @@ $(function () {
       console.log('user created');
       document.location.href='/my-stats';
     }
-    $.ajax({
-      method: 'post',
-      url: '/api/users',
-      type: 'json',
-      data: $(this).serialize(),
-      success: function (response) {
-        if (response.error) {
-          onNewUserError(response);
-        } else {
-          onNewUserCreated(response);
-        }
-      },
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-    })
+
+    var ripple_address = $('input[name="ripple_address"]').val();
+    var validRippleAddress = ripple.UInt160.from_json(ripple_address).is_valid();
+    if (validRippleAddress) {
+      $('#rippleAddressErrors').hide();
+      $.ajax({
+        method: 'post',
+        url: '/api/users',
+        type: 'json',
+        data: $(this).serialize(),
+        success: function (response) {
+          if (response.error) {
+            onNewUserError(response);
+          } else {
+            onNewUserCreated(response);
+          }
+        },
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      })
+    } else {
+      $('#rippleAddressErrors').text('please enter a valid ripple public address').show();
+    }
   });
 
   $('#signInForm').on('submit', function (e) {
