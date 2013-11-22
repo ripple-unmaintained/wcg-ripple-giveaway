@@ -17,5 +17,8 @@ class Claim < ActiveRecord::Base
       ripple_address: user_ripple_address,
       xrp_amount: self.points / self.rate
     })
+
+    self.transaction_status = 'submitted'
+    self.save
   end
 end

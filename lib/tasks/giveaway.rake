@@ -12,6 +12,7 @@ task :process_points_accumulated, :environment do
   rate = Stats.global[:today] / claims.sum(:points).to_f
   claims.each do |claim|
   	claim.rate = rate
+  	claim.xrp_disbursed = claim.points / rate
   	claim.save
   	claim.enqueue
   end
