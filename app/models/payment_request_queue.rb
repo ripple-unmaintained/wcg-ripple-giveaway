@@ -1,6 +1,6 @@
 class PaymentRequestQueue
   def self.queue
-  	@queue ||= AWS::SQS.new('payment_requests')
+  	@queue ||= AWS::SQS.new(ENV['PAYMENT_REQUESTS_QUEUE_NAME'])
   end
 
   def self.push(hash)

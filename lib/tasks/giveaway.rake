@@ -17,3 +17,7 @@ task :process_points_accumulated, :environment do
   	claim.enqueue
   end
 end
+
+task :process_confirmations do
+  PaymentConfirmationsQueue.process_confirmed_payments
+end

@@ -10,6 +10,12 @@ class Claim < ActiveRecord::Base
     User.where(member_id: self.member_id).first
   end
 
+  def confirm_payment(confirmation)
+    self.transaction_hash = confirmation['transaction_hash']
+    self.transaction_hash = confirmation['transaction_status']
+    self.save
+  end
+
   def enqueue
   	# if < 50 xrp && > 8 hours && !funded then push 50
     PaymentRequestsQueue.push({
