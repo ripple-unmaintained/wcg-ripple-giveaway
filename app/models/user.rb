@@ -2,7 +2,7 @@ require 'ripple'
 
 class User < ActiveRecord::Base
   # add funded boolean
-  validates_presence_of :member_id, :ripple_address
+  validates_presence_of :member_id, :ripple_address, :initial_run_time, :initial_points
   validates_uniqueness_of :member_id
   validate :member_of_ripple_team
   has_many :claims
