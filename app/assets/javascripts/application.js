@@ -83,6 +83,8 @@ $(function () {
   $('#signInForm').on('submit', function (e) {
     e.preventDefault();
     function onError (response) {
+      $('.ajaxLoader').hide();
+
       if (response.error == 'no registration') {
         $('#loginErrors').html('You are not registered with computingforgood.org yet. Please sign up ');
         $('#loginErrors').append($('<a/>').text('here.').attr('href', '/register')).show();
@@ -91,8 +93,10 @@ $(function () {
       }
     }
     function onSuccess (response) {
+      $('.ajaxLoader').hide();
       document.location.href='/my-stats';
     }
+    $('.ajaxLoader').show();
     $.ajax({
       method: 'post',
       url: '/api/sessions',
