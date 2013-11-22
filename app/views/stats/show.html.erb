@@ -7,7 +7,9 @@
           <div class="row">
             <div class="col-md-12">
               <div class="special-heading textalignleft default animated-content move_right animate" style="padding-bottom: 0px;">
-                <h1 style="color: #ffffff;" class="fancy default"><span>My Stats</span><span style='float:right'><img class='ajaxLoader' src='/ajax-loader.gif'</span></h1>
+                <h1 style="color: #ffffff;" class="fancy default"><span>My Stats</span>
+                  <span class='headerRight' style='float:right'><img class='ajaxLoader' src='/ajax-loader.gif'/></span>
+                </h1>
               </div>
             </div>
           </div>
@@ -22,12 +24,13 @@
 
 <section class="main-content custom-padding shadow-off" style="padding-top: 70px; padding-bottom: 86px;"><div class="container"><div class="row">
   <div class="col-md-12">
+  <!--
       <div class="row">
   <div class="col-md-12">
       <div class="special-heading textalignleft default animated-content fade_in animate" style="padding-bottom: 0px;"><h2 style="color: #3962ae;" class="fancy default"><span>{{= username }}</span></h2></div>
 <div class="divider normal animated-content fade_in animate" style="margin-top: 20px; margin-bottom: 70px;"></div>
 
-  </div> 
+  </div> -->
 </div><div class="row">
   <div class="col-md-6">
       <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;"><h2 style="color: #3962ae;" class="fancy default"><span>{{= personalHours }}</span></h2></div>
@@ -57,7 +60,7 @@
 </div><div class="blank_divider" style="height: 70px;"></div>
 <div class="row">
   <div class="col-md-6">
-      <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;"><h2 style="color: #3962ae;" class="fancy default"><span>{{= total_xrp }} XRP</span></h2></div>
+      <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;"><h2 style="color: #3962ae;" class="fancy default"><span>{{= today }} XRP</span></h2></div>
 <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;"><h3 class="fancy default"><span>
 <p>Today’s XRP Giveaway<br>
 Updated 11/20/2013</p>
@@ -95,6 +98,7 @@ Updated 11/20/2013</p>
   $(function () {
     $.getJSON('/api/stats', function(data) {
       $('.ajaxLoader').hide();
+      $('.headerRight').html(data.user.name);
       var params = {
         username: data.user.name
       }

@@ -1,13 +1,13 @@
 class Stats
   def self.global
-  	if (stats = REDIS.get('global_stats'))
+  	if (stats = REDIS.get('global_stats')).present?
       data = JSON.parse(stats)
   	else
       self.store_in_redis!({
         rate: 40,
-        today: 300_000,
-        total_hours: 999_837_787,
-        total_xrp: 999_837_787
+        today: 300000,
+        total_hours: (User.all.sum(:total_time).to_i / 60.0 / 60),
+        total_xrp: Claim.paid.sum(:xrp_disbursed).to_i
       })
       self.global
   	end
@@ -16,7 +16,7 @@ class Stats
   def self.store_in_redis!(params)
     data = {
       rate: format(params[:rate]),
-      today: format(params[:xrp_today]),
+      today: format(params[:today]),
       total_hours: format(params[:total_hours]),
       total_xrp: format(params[:total_xrp])
     }
