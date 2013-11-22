@@ -23,11 +23,6 @@ module Wcg
       end
     end
 
-    def get_member_stats(name)
-      member = get_team_member(name)
-      parse_stats(member)
-    end
-
     def parse_stats(member)
       stats = {}
       member['stats'].each do |stat|
