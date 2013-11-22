@@ -2,7 +2,8 @@ class Api::StatsController < ApplicationController
   def index
     if session[:user]
       render json: { user: Wcg.get_team_member(session[:user][:username]),
-      	claims: Claim.where(member_id: session[:user][:member_id])
+      	claims: Claim.where(member_id: session[:user][:member_id]),
+      	global: Stats.global
       }
     else
       render json: {}
