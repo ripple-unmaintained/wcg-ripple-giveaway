@@ -18,6 +18,8 @@ _.templateSettings = {
   evaluate: /\{\{(.+?)\}\}/g
 };
 
+
+
 $ = jQuery;
 
 $(function () {
@@ -41,7 +43,7 @@ $(function () {
       }
 
       if (response.error && response.error.verification_code && response.error.verification_code.length > 0) {
-        $('#wcgVerificationCodeErrors').text('WCG verification code ' + response.error.verification_code[0]).show();
+        $('#wcgVerificationCodeErrors').text('The WCG username or verification code you entered is incorrect').show();
       } else {
         $('#wcgVerificationCodeErrors').hide();
       }
@@ -70,7 +72,7 @@ $(function () {
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       })
     } else {
-      $('#rippleAddressErrors').text('please enter a valid ripple public address').show();
+      $('#rippleAddressErrors').text('Please enter a valid Ripple public address').show();
     }
   });
 
@@ -78,8 +80,8 @@ $(function () {
     e.preventDefault();
     function onError (response) {
       if (response.error == 'no registration') {
-        $('#loginErrors').html('you are not yet registered, please sign up ');
-        $('#loginErrors').append($('<a/>').text('here').attr('href', '/register')).show();
+        $('#loginErrors').html('You are not registered with computingforgood.org yet. Please sign up ');
+        $('#loginErrors').append($('<a/>').text('here.').attr('href', '/register')).show();
       } else {
         $('#loginErrors').show();
       }
