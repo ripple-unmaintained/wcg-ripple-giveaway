@@ -26,6 +26,8 @@ $(function () {
   $('#newUserForm').on('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
+      $('.ajaxLoader').hide();
+
       if (response.error && response.error == 'service unavailable') {
         alert("The WCG Service is currently unavailable. Please try again later");
       }
@@ -49,6 +51,7 @@ $(function () {
       }
     }
     function onNewUserCreated (response) {
+      $('.ajaxLoader').hide();
       console.log('user created');
       document.location.href='/my-stats';
     }
@@ -57,6 +60,7 @@ $(function () {
     var validRippleAddress = ripple.UInt160.from_json(ripple_address).is_valid();
     if (validRippleAddress) {
       $('#rippleAddressErrors').hide();
+      $('.ajaxLoader').show();
       $.ajax({
         method: 'post',
         url: '/api/users',
