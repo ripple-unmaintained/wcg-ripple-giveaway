@@ -77,7 +77,12 @@ $(function () {
   $('#signInForm').on('submit', function (e) {
     e.preventDefault();
     function onError (response) {
-      $('#loginErrors').show();
+      if (response.error == 'no registration') {
+        $('#loginErrors').html('you are not yet registered, please sign up ');
+        $('#loginErrors').append($('<a/>').text('here').attr('href', '/register')).show();
+      } else {
+        $('#loginErrors').show();
+      }
     }
     function onSuccess (response) {
       document.location.href='/my-stats';

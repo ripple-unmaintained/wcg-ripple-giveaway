@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
         user.errors.add(:verification_code, "does not match the WCG username")
       else
         user.member_id = wcg_response[:member_id]
+        wcg_user_stats_response = Wcg.get_member_stats(user.username)
+        user.initial_run_time = wcg_user_stats_response[:RunTime] || 0
+        user.initial_points = wcg_user_stats_response[:Points] || 0
         user.save
       end
       return user

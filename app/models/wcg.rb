@@ -23,6 +23,16 @@ module Wcg
       end
     end
 
+    def get_member_stats(name)
+      member = get_team_member(name)
+      stats = {}
+      member['stats'].each do |stat|
+        key = stat.keys[0]
+        stats[key] = stat[key]
+      end
+      stats
+    end
+
     def get_team_member(name)
       get_team.select { |member| member['name'] == name }[0]
     end
