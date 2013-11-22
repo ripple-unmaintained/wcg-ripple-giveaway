@@ -7,7 +7,7 @@ class Claim < ActiveRecord::Base
   scope :needs_rate, where('rate IS NULL')
 
   def user_ripple_address
-    User.where(member_id: self.member_id).first
+    User.where(member_id: self.member_id).first.ripple_address
   end
 
   def confirm_payment(confirmation)
@@ -17,8 +17,7 @@ class Claim < ActiveRecord::Base
   end
 
   def enqueue
-  	# if < 50 xrp && > 8 hours && !funded then push 50
-    PaymentRequestsQueue.push({
+    PaymentRequestQueue.push({
       unique_id: self.id,
       ripple_address: user_ripple_address,
       xrp_amount: self.points / self.rate
