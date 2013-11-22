@@ -13,6 +13,11 @@
 //= require_tree .
 //= require_self
 
+_.templateSettings = {
+  interpolate: /\{\{\=(.+?)\}\}/g,
+  evaluate: /\{\{(.+?)\}\}/g
+};
+
 $ = jQuery;
 
 $(function () {
