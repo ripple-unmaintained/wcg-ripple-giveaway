@@ -15,6 +15,8 @@ module Wcg
       response = HTTParty.get(url).parsed_response
       if response['Error']
         false
+      elsif response['unavailable']
+        :service_unavailable
       else
         { member_id: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['MemberId'],
           username: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['Name'] }

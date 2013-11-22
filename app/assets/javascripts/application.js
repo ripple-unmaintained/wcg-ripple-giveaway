@@ -24,6 +24,9 @@ $(function () {
   $('#newUserForm').on('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
+      if (response.error && response.error == 'service unavailable') {
+        alert("The WCG Service is currently unavailable. Please try again later");
+      }
       console.log(response);
       if (response.error && response.error.member_id && response.error.member_id.length > 0) {
         $('#wcgUsernameErrors').text('username ' + response.error.member_id[0]).show();

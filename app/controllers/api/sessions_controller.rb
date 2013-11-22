@@ -1,8 +1,12 @@
 class Api::SessionsController < ApplicationController
   def create
-    if (user = Wcg.verify_user(params[:username], params[:verification_code]))
-      session[:user] = user
-      render json: user
+    if (wcg_user_response = Wcg.verify_user(params[:username], params[:verification_code]))
+      if wcg_user_response != :service_unavailable
+        session[:user] = wcg_user_response
+        render json: wcg_user_response
+      else
+        render json: { error: 'service unavailable' }
+      end
     else
       render json: { error: 'invalid username or verification code' }
     end
