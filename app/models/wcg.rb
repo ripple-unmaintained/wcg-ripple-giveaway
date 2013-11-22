@@ -25,6 +25,10 @@ module Wcg
 
     def get_member_stats(name)
       member = get_team_member(name)
+      parse_stats(member)
+    end
+
+    def parse_stats(member)
       stats = {}
       member['stats'].each do |stat|
         key = stat.keys[0]
@@ -34,7 +38,9 @@ module Wcg
     end
 
     def get_team_member(name)
-      get_team.select { |member| member['name'] == name }[0]
+      member = get_team.select { |member| member['name'] == name }[0]
+      member['stats'] = parse_stats(member)
+      member
     end
 
   private

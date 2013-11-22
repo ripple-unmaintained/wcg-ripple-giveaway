@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
   validates_presence_of :member_id, :ripple_address, :initial_run_time, :initial_points
   validates_uniqueness_of :member_id
   validate :member_of_ripple_team
-  has_many :claims
+
+  def claims
+    Claim.where(member_id: self.member_id)
+  end
 
   def self.create_from_username(params)
     user = new({ ripple_address: params[:ripple_address],

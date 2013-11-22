@@ -104,12 +104,7 @@ Updated 11/20/2013</p>
         params.personalHours = 0;
         params.personalXrp = 0;
       } else {
-        _.each(data.user.stats, function(stat) {
-          console.log(stat);
-          if (stat['RunTime']) {
-            params.personalHours = Math.round(stat['RunTime'] / 60.0 / 60.0);
-          }
-        })
+        params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
         params.personalXrp = 0;
         console.log(data.user.stats);
       }
