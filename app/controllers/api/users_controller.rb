@@ -5,13 +5,17 @@ class Api::UsersController < ApplicationController
       username: params[:username],
       verification_code: params[:verification_code]
   	})
-
-    if user.errors.messages.empty?
-      session[:user] = { member_id: user.member_id, username: user.username }
-      render json: { user: user.attributes }
+    if user == :service_unavailable
+      render json: { error: 'service unavailable' }
     else
-      render json: { error: user.errors }
+      if user.errors.messages.empty?
+        session[:user] = { member_id: user.member_id, username: user.username }
+        render json: { user: user.attributes }
+      else
+        render json: { error: user.errors }
+      end
     end
+
   end
 
   def stats
