@@ -49,6 +49,19 @@
 /*	0.	Font-Family Elements Setup
 /*-----------------------------------------------------------------------------------*/
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('fonts/OpenSans-Regular.eot'); /* IE9 Compat Modes */
+  src: url('fonts/OpenSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/OpenSans-Regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/OpenSans-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/OpenSans-Regular.svg#dc56f0938c09c27a4156bb0f8f5176a2') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+
+
 body,
 input,
 button,
@@ -62,7 +75,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'OpenSans', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /*-----------------------------------------------------------------------------------*/
