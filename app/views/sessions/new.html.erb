@@ -1,6 +1,3 @@
-		
-	
-    
 <div id="content">
 	                <section class="main-content border-btm-grey small-padding shadow-off" style="background-color: #3962ae;"><div class="container"><div class="row">
 	<div class="col-md-12">
@@ -19,7 +16,9 @@
 
 	<div class="wpb_raw_code wpb_content_element wpb_raw_html">
 		<div class="wpb_wrapper">
-			<form method='post' action='/sessions' id='newSessionForm'>
+
+			<form method='post' action='/sessions' id='signInForm'>
+			<p id='loginErrors' style='display:none;color:red'>Invalid WCG Username and Verification Code combination</p>
 
 			<p>
 <a style="color:#818B92; cursor:default;" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/my-stats-2/?preview=true&preview_id=712&preview_nonce=1a9830fc26#" data-toggle="tooltip" data-placement="right" data-original-title="">
@@ -36,15 +35,17 @@ WCG Verification Code
 <br>
 <input type="text" name="verification_code" value="" size="40" aria-required="true">
 </p>
-		</div> 
+		</div>
 	</div> <div class="blank_divider" style="height: 15px;"></div>
 	  </>
 
-<input type='submit' class="button-main button-large animated-content fade_in animate" value="Check My Stats"></input>
+<input type='submit' class="button-main button-large animated-content fade_in animate" value="Check My Stats">
+  <img class='ajaxLoader' src='/ajax-loader.gif' style='display:none'/>
+</input>
 
-	</div> 
+	</div>
 </div>
-	</div> 
+	</div>
 </div></div></section><section class="main-content no-padding shadow-off"><div class="container-fluid"><div class="row">
 	<div class="col-md-12">
 			<div class="divider normal animated-content fade_in animate" style="margin-top: 30px; margin-bottom: 36px;"></div>
