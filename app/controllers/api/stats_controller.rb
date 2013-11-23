@@ -20,4 +20,8 @@ class Api::StatsController < ApplicationController
       render json: {}
     end
   end
+
+  def global
+    render json: Stats.global
+  end
 end
