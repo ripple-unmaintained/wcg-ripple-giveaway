@@ -16,7 +16,7 @@ module Wcg
       if response['Error']
         false
       elsif response['unavailable']
-        :service_unavailable
+        raise WcgServiceUnavailable
       else
         { member_id: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['MemberId'],
           username: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['Name'] }
@@ -41,7 +41,11 @@ module Wcg
   private
     def total_team_members
       doc = Nokogiri::HTML(open team_url(1, 50, false))
-      /(\d+)/.match(doc.css('.contentTextBold+ .contentText').children.last.text)[1].to_i
+      begin
+        /(\d+)/.match(doc.css('.contentTextBold+ .contentText').children.last.text)[1].to_i
+      rescue
+        raise WcgServiceUnavailable
+      end
     end
 
     def team_url(page, per_page, xml=true)
