@@ -57,7 +57,7 @@ $(function () {
     $('header').html(_.template($('#headerTemplate').html()),{});
   }
 
-  $('#newUserForm').on('submit', function (e) {
+  $('#newUserForm').live('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
       $('.ajaxLoader').hide();
@@ -114,7 +114,7 @@ $(function () {
     }
   });
 
-  $('#signInForm').on('submit', function (e) {
+  $('#signInForm').live('submit', function (e) {
     e.preventDefault();
     function onError (response) {
       $('.ajaxLoader').hide();
