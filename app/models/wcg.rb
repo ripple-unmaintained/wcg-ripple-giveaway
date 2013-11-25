@@ -14,6 +14,10 @@ module Wcg
       end
   	end
 
+    def total_hours
+      self.get_team(cached: true).collect{|m| Wcg.parse_stats(m) }.reject(&:nil?).inject(0) {|sum, s| sum + s['RunTime'].to_f} / 60 / 60
+    end
+
     def verify_user(username, verification_code)
       username = URI.escape(username)
       verification_code = URI.escape(verification_code)
