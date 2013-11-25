@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122213226) do
+ActiveRecord::Schema.define(version: 20131125185314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20131122213226) do
 
   create_table "claims", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.integer  "member_id",          limit: 8
-    t.integer  "rate",               limit: 8
+    t.decimal  "rate"
     t.integer  "points",             limit: 8
     t.integer  "xrp_disbursed",      limit: 8
     t.string   "transaction_hash"

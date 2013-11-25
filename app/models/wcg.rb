@@ -2,11 +2,21 @@ require 'open-uri'
 
 module Wcg
   class << self
-  	def get_team
-      Nokogiri::XML(open(team_url(1, total_team_members + 1))).css('TeamMember').map do |member|
-        parse_member(member)
+  	def get_team(opts={})
+      if opts[:cached]
+        JSON.parse REDIS.get('wcg_ripple_team')
+      else
+        team = Nokogiri::XML(open(team_url(1, total_team_members + 1))).css('TeamMember').map do |member|
+          parse_member(member)
+        end
+        REDIS.set('wcg_ripple_team', team.to_json)
+        team
       end
   	end
+
+    def points_earned_for(member)
+
+    end
 
     def verify_user(username, verification_code)
       username = URI.escape(username)
@@ -24,12 +34,16 @@ module Wcg
     end
 
     def parse_stats(member)
-      stats = {}
-      member['stats'].each do |stat|
-        key = stat.keys[0]
-        stats[key] = stat[key]
+      if member['stats'].empty?
+        return nil
+      else
+        stats = {}
+        member['stats'].each do |stat|
+          key = stat.keys[0]
+          stats[key] = stat[key]
+        end
+        stats
       end
-      stats
     end
 
     def get_team_member(name)
