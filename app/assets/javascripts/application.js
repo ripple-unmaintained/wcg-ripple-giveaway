@@ -23,6 +23,13 @@ _.templateSettings = {
 $ = jQuery;
 
 $(function () {
+  var chinese;
+  if (chinese) {
+    $('header').html(_.template($('#headerTemplateChinese').html()),{});
+  } else {
+    $('header').html(_.template($('#headerTemplate').html()),{});
+  }
+
   $('#newUserForm').on('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
