@@ -1,140 +1,57 @@
 <div id="content">
-
-  <section class="main-content border-btm-grey small-padding shadow-off" style="background-color: #3962ae;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="special-heading textalignleft default animated-content move_right animate" style="padding-bottom: 0px;">
-                <h1 style="color: #ffffff;" class="fancy default">
-                  <span>My Stats</span>
-                  <span class='headerRight' style='float:right'><img class='ajaxLoader' src='/ajax-loader.gif'/></span>
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </div>
-<script type='text/template' id='statsPageTemplate'>
-
-  <section class="main-content custom-padding shadow-off" style="padding-top: 70px; padding-bottom: 86px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-
-          <!--div class="row">
-            <div class="col-md-12">
-              <div class="special-heading textalignleft default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h2 style="color: #3962ae;" class="fancy default"><span>{{= username }}</span></h2>
-              </div>
-              <div class="divider normal animated-content fade_in animate" style="margin-top: 20px; margin-bottom: 70px;"></div>
-            </div>
-          </div-->
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h2 style="color: #3962ae;" class="fancy default"><span>{{= personalHours }}</span></h2>
-              </div>
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h3 class="fancy default"><span>My Hours Contributed</span></h3>
-              </div>
-              <div class="divider short animated-content fade_in animate" style="margin-top: 20px; margin-bottom: 20px;"></div>
-            </div>
-            <div class="col-md-6">
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h2 style="color: #3962ae;" class="fancy default"><span>{{= personalXrp }}</span></h2>
-              </div>
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h3 class="fancy default"><span>My XRP Earned</span></h3>
-              </div>
-              <div class="divider short animated-content fade_in animate" style="margin-top: 20px; margin-bottom: 20px;"></div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h2 style="color: #3962ae;" class="fancy default"><span>{{= total_hours }} Hours</span></h2>
-              </div>
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h3 class="fancy default"><span>Global Hours Contributed</span></h3>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h2 style="color: #3962ae;" class="fancy default"><span>{{= total_xrp }} XRP</span></h2>
-              </div>
-              <div class="special-heading textaligncenter default animated-content fade_in animate" style="padding-bottom: 0px;">
-                <h3 class="fancy default"><span>Global XRP Earned</span></h3>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="main-content no-padding shadow-off">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="divider normal animated-content fade_in animate" style="margin-top: 0px; margin-bottom: 36px;"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="main-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="text-block animated-content fade_in animate"> <span style="color: #bbbbbb; font-size: 12px;">This giveaway may be discontinued at any time without notice. At any time and without prior notice, Ripple Labs may change the total XRP given away per day, as well as the WCG point to XRP giveaway ratio. Ripple Labs is not affiliated with or endorsed by the World Community Grid, nor do we endorse them. Please report bugs and direct questions about this giveaway to support@ripple.com. Otherwise, please refer to support from WCG for particulars about running their client. Security bugs, in this giveaway, must be reported unused to be eligible for the Ripple XRP Bug Bounty. Please report security bugs in accordance with the bounty rules. If you find a security bug in the World Community Grid, please inform them directly as we have no special access to their team.</span>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</script>
 
 <% content_for :javascripts do %>
 <script>
+  var myData, chinese = false;
+
   $ = jQuery;
   $(function () {
+
+    function displayMyData (data, chinese) {
+      $('.ajaxLoader').hide();
+
+      $('.headerRight').html(data.user.name);
+      var params = {
+        username: data.user.name
+      }
+      _.extend(params, data.global);
+      if (data.user.stats.length < 1) {
+        params.personalHours = 0;
+        params.personalXrp = 0;
+      } else {
+        params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
+        params.personalXrp = 0;
+        console.log(data.user.stats);
+      }
+      if (chinese) {
+        $('#content').html(_.template($('#statsPageTemplateChinese').html(), params));
+      } else {
+        $('#content').html(_.template($('#statsPageTemplate').html(), params));
+      }
+    }
+
     $.getJSON('/api/stats', function(data) {
-    $('.ajaxLoader').hide();
-    if (data.error) {
-      $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being updated. Please try again later.').css('text-align','center'));
-    } else {
-        $('.headerRight').html(data.user.name);
-        var params = {
-          username: data.user.name
-        }
-        _.extend(params, data.global);
-        if (data.user.stats.length < 1) {
-          params.personalHours = 0;
-          params.personalXrp = 0;
-        } else {
-          params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
-          params.personalXrp = 0;
-          console.log(data.user.stats);
-        }
-        console.log(data);
-        $('#content').append(_.template($('#statsPageTemplate').html(), params));
+      myData = data;
+      $('.ajaxLoader').hide();
+      if (data.error) {
+        $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being   updated. Please try again later.').css('text-align','center'));
+      } else {
+        displayMyData(data, chinese)
       }
     });
+
+    $(document).on('change:language', function(event, language) {
+      console.log(myData);
+      if (language == 'chinese') {
+        chinese = true;
+        displayMyData(myData, chinese)
+      } else {
+        chinese = false;
+        displayMyData(myData, chinese)
+      }
+    })
+
   });
 </script>
 <% end %>
