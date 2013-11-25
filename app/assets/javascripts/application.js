@@ -18,11 +18,38 @@ _.templateSettings = {
   evaluate: /\{\{(.+?)\}\}/g
 };
 
-
-
 $ = jQuery;
 
 $(function () {
+
+  window.setHeader = function (opts) {
+    if (opts.chinese) {
+      $('header').html(_.template($('#headerTemplateChinese').html()),{});
+    } else {
+      $('header').html(_.template($('#headerTemplate').html()),{});
+    }
+  }
+
+  $(document).on('change:language', function(event, language) {
+    if (language == 'chinese') {
+      chinese = true;
+      setHeader({ chinese: true });
+    } else {
+      chinese = false;
+      setHeader({ chinese: false });
+    }
+  })
+
+  var language;
+  $('select').on('change', function (e){
+    language = $(this).val();
+    if (language == 'chinese') {
+      $(document).trigger('change:language', 'chinese');
+    } else {
+      $(document).trigger('change:language', 'english');
+    }
+  })
+
   var chinese;
   if (chinese) {
     $('header').html(_.template($('#headerTemplateChinese').html()),{});
