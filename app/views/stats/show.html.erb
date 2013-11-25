@@ -99,7 +99,7 @@ Updated 11/20/2013</p>
     $.getJSON('/api/stats', function(data) {
     $('.ajaxLoader').hide();
     if (data.error) {
-      $('.main-content').after($('<p/>').text('We are sorry but the WCG is currently unavailable. Please try againg later.').css('text-align','center'));
+      $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being updated. Please try again later.').css('text-align','center'));
     } else {
         $('.headerRight').html(data.user.name);
         var params = {
