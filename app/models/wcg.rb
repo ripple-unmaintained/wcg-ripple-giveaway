@@ -14,10 +14,6 @@ module Wcg
       end
   	end
 
-    def points_earned_for(member)
-
-    end
-
     def verify_user(username, verification_code)
       username = URI.escape(username)
       verification_code = URI.escape(verification_code)
