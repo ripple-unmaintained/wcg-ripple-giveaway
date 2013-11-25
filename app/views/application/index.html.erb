@@ -93,7 +93,7 @@
 <% content_for :javascripts do %>
 	<script>
       $.getJSON('/api/stats/global', function(stats) {
-        stats.total_hours = Math.round(stats.total_hours);
+      	console.log(stats);
         var html = _.template($('#homeTemplate').html(), stats);
         $('#main').html(html);
       });
