@@ -74,3 +74,4 @@ end
 task :process_confirmations do
   PaymentConfirmationsQueue.process_confirmed_payments
 end
+
