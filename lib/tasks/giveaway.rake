@@ -66,6 +66,8 @@ end
 task submit_new_claims: :environment do
   Claim.unsubmitted.has_rate.each do |claim|
     claim.enqueue
+    claim.transaction_status = 'submitted'
+    claim.save
   end
 end
 
