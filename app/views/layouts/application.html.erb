@@ -12,18 +12,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Mobile Internet Explorer ClearType Technology -->
   <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
-  
+
   <!--Shortcut icon-->
   <link rel="icon" type="image/x-icon" href="/pbulic/favicon.ico" />
   <link rel="icon" type="image/png" href="/public/favicon.png" />
-  
+
   <!-- Title -->
-  <title>Computing for Good</title>  
+  <title>Computing for Good</title>
   <!-- RSS & Pingbacks -->
   <meta property="og:site_name" content="Computing for Good">
   <meta property="og:title" content="Home">
   <meta property="og:type" content="article">
-  
+
   <link rel="alternate" type="application/rss+xml" title="Computing for Good » Home Comments Feed" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/home/feed/">
   <link rel="stylesheet" id="admin-bar-css" href="/home_files/admin-bar.min.css" type="text/css" media="all">
   <link rel="stylesheet" id="contact-form-7-css" href="/home_files/styles.css" type="text/css" media="all">
@@ -34,7 +34,7 @@
   <link rel="stylesheet" id="main-styles-css" href="/home_files/style.css" type="text/css" media="all">
   <link rel="stylesheet" id="dynamic_colors-css" href="/home_files/color.css.php" type="text/css" media="all">
   <link rel="stylesheet" id="custom_css-css" href="/home_files/custom.css.php" type="text/css" media="all">
-  
+
   <div class="fit-vids-style" id="fit-vids-style" style="display: none;">
     ­<style>
       .fluid-width-video-wrapper {
@@ -53,7 +53,7 @@
       }
     </style>
   </div>
-  
+
   <script type="text/javascript" src="./home_files/jquery.js"></script><style type="text/css"></style>
   <script type="text/javascript" src="/home_files/jquery-migrate.min.js"></script>
   <script type="text/javascript" src="/home_files/jquery.themepunch.revolution.min.js"></script>
@@ -68,13 +68,13 @@
     }
   </style>
   <style type="text/css" media="print">
-    #wpadminbar { 
-      display:none; 
+    #wpadminbar {
+      display:none;
     }
   </style>
   <style type="text/css" media="screen">
     .errors {
-      color: red; 
+      color: red;
       display: none
     }
   </style>
@@ -83,45 +83,33 @@
 <body class="home page page-id-406 page-template-default logged-in admin-bar chrome page-home az wpb-js-composer js-comp-ver-3.6.2 vc_responsive customize-support">
   <!-- Start Wrap All -->
   <div class="wrap_all">
-  
+
     <%= render 'partials/header' %>
-  
-    <!-- Mobile Navigation Mobile Menu 
-    <div id="navigation-mobile" style="display: none;">
-    	<div class="container">
-        	<div class="row">
-            	<div class="col-md-12">
-                	<ul id="menu-nav-mobile">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-406 current_page_item menu-item-408"><a href="./home_files/home.html">Home</a></li>
-    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459"><a href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/setup/">Setup</a></li>
-    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-600"><a href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/stats/">Stats</a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-    </div>
-    -->
-    <!-- End Navigation Mobile Menu -->
-  
+
     <!-- Main -->
     <div id="main" class="normal-header-enabled">
     	<%= yield %>
     </div>
     <!-- End Main -->
-  
+
     <footer>
       <!-- Footer Credits -->
       <section id="footer-credits">
       	<div class="container">
       		<div class="row">
-      		
+
             <div class="col-md-6">
               <p class="credits"></p>
+
               <p class="copyright">©2013 <a href="http://www.ripplelabs.com">Ripple Labs Inc.</a></p>
             </div>
-            
+
             <div class="col-md-6">
               <!-- Social Icons -->
+              <select style='float:right; font-size:300%' id='languageSelect'>
+                <option value='english'>English</option>
+                <option value='chinese'>Chinese</option>
+              </select>
               <nav id="social-footer">
                 <ul>
                   <li><a href="mailto:support@ripple.com" target="_blank"><i class="font-icon-social-email"></i></a></li>
@@ -129,22 +117,22 @@
               </nav>
               <!-- End Social Icons -->
             </div>
-      
+
       		</div>
       	</div>
       </section>
       <!-- End Footer Credits -->
     </footer>
-    
+
   </div>
   <!-- End Wrap All -->
-  
+
   <!-- Back To Top -->
   <a id="back-to-top" href="#">
   	<i class="font-icon-arrow-up-simple-thin-round"></i>
   </a>
   <!-- End Back to Top -->
-  
+
   <script type="text/javascript" src="/home_files/admin-bar.min.js"></script>
   <script type="text/javascript" src="/home_files/jquery.form.min.js"></script>
   <script type="text/javascript">
@@ -175,6 +163,11 @@
   <script src='/ripple-0.7.30-min.js'></script>
   <script src='/underscore-min.js'></script>
   <%= javascript_include_tag "application" %>
+  <%= yield :templates %>
+  <%= render 'js_templates/home' %>
+  <%= render 'js_templates/register' %>
+  <%= render 'js_templates/login' %>
+  <%= render 'js_templates/my_stats' %>
   <%= yield :javascripts %>
 </body>
 </html>

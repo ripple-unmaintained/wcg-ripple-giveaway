@@ -10,6 +10,21 @@ class User < ActiveRecord::Base
     Claim.where(member_id: self.member_id)
   end
 
+  def wcg_stats
+    Wcg::get_team(cached: true).select {|member| member['id'] == self.member_id.to_s }[0]
+  end
+
+  def wcg_points_earned
+    @wcg_points_earned ||= begin
+      stats = Wcg.parse_stats(self.wcg_stats)
+      if stats.nil? || stats.empty?
+        0.0
+      else
+        stats["Points"].to_f - initial_points
+      end
+    end
+  end
+
   def self.create_from_username(params)
     user = new({ ripple_address: params[:ripple_address],
       username: params[:username]
