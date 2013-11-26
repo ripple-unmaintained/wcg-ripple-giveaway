@@ -15,16 +15,5 @@ class Api::UsersController < ApplicationController
         render json: { error: user.errors }
       end
     end
-
-  end
-
-  def stats
-  	user = User.find(params[:id])
-    claims = Claim.where(member_id: user.member_id)
-    render json: {
-      user: user.to_json,
-      claims: claims.to_json,
-      stats: Wcg.get_team_member(user.member_id)
-    }
   end
 end
