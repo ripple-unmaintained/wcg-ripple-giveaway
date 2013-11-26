@@ -22,13 +22,14 @@
       } else {
         params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
         params.personalXrp = 0;
-        console.log(data.user.stats);
       }
       if (chinese) {
         $('#content').html(_.template($('#statsPageTemplateChinese').html(), params));
       } else {
         $('#content').html(_.template($('#statsPageTemplate').html(), params));
       }
+
+      $('.ajaxLoader').hide();
     }
 
     $.getJSON('/api/stats', function(data) {
@@ -42,7 +43,6 @@
     });
 
     $(document).on('change:language', function(event, language) {
-      console.log(myData);
       if (language == 'chinese') {
         chinese = true;
         displayMyData(myData, chinese)
