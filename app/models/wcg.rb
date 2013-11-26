@@ -4,15 +4,24 @@ module Wcg
   class << self
   	def get_team(opts={})
       if opts[:cached]
-        JSON.parse REDIS.get('wcg_ripple_team')
-      else
-        team = Nokogiri::XML(open(team_url(1, total_team_members + 1))).css('TeamMember').map do |member|
-          parse_member(member)
+        team = REDIS.get('wcg_ripple_team')
+        if !team.nil? && !team.empty?
+          JSON.parse(team)
+        else
+          parse_and_set_team
         end
-        REDIS.set('wcg_ripple_team', team.to_json)
-        team
+      else
+        parse_and_set_team
       end
   	end
+
+    def parse_and_set_team
+      team = Nokogiri::XML(open(team_url(1, total_team_members + 1))).css('TeamMember').map do |member|
+        parse_member(member)
+      end
+      REDIS.set('wcg_ripple_team', team.to_json)
+      team
+    end
 
     def total_hours
       self.get_team(cached: true).collect{|m| Wcg.parse_stats(m) }.reject(&:nil?).inject(0) {|sum, s| sum + s['RunTime'].to_f} / 60 / 60
