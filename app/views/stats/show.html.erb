@@ -35,7 +35,7 @@
       myData = data;
       $('.ajaxLoader').hide();
       if (data.error) {
-        $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being   updated. Please try again later.').css('text-align','center'));
+        $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being updated. Please try again later.').css('text-align','center'));
       } else {
         displayMyData(data, chinese)
       }

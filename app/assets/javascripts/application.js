@@ -18,9 +18,41 @@ _.templateSettings = {
   evaluate: /\{\{(.+?)\}\}/g
 };
 
+var pageLanguage = 'english';
+
+var errors = {
+  english: {
+    wcg_unavailable: "The WCG Service is currently unavailable. Please try again later",
+    verification_code: 'The WCG username or verification code you entered is incorrect',
+    not_registered: 'You are not registered with computingforgood.org yet. Please sign up',
+    public_address: 'Please enter a valid Ripple public address'
+  },
+  chinese: {
+    wcg_unavailable: "WCG正在更新统计信息, 请等待一段时间再试一次.",
+    verification_code: ' 你的WCG 用户名或WCG 验证码不对',
+    not_registered: '你没有注册，请在此处注册。',
+    public_address: '这不是一个有效的 Ripple 钱包地址。'
+  }
+};
+
 $ = jQuery;
 
 $(function () {
+
+  window.setCurrentNavLink = function () {
+    var matches = [];
+    _.each($('a'), function (a) {
+      $('li').removeClass('current_page_item');
+      if ($(a).attr('href') == document.location.pathname) {
+        matches.push(a);
+      }
+    });
+
+    console.log(matches);
+    _.each(matches, function(a) {
+      $(a).closest('li').addClass('current_page_item');
+    })
+  }
 
   window.setHeader = function (opts) {
     if (opts.chinese) {
@@ -28,9 +60,11 @@ $(function () {
     } else {
       $('header').html(_.template($('#headerTemplate').html()),{});
     }
+    setCurrentNavLink();
   }
 
   $(document).on('change:language', function(event, language) {
+    pageLanguage = language;
     if (language == 'chinese') {
       chinese = true;
       setHeader({ chinese: true });
@@ -40,17 +74,15 @@ $(function () {
     }
   })
 
-  var language;
   $('select').on('change', function (e){
-    language = $(this).val();
-    if (language == 'chinese') {
+    if ($(this).val() == 'chinese') {
       $(document).trigger('change:language', 'chinese');
     } else {
       $(document).trigger('change:language', 'english');
     }
   })
-
   var chinese;
+
   if (chinese) {
     $('header').html(_.template($('#headerTemplateChinese').html()),{});
   } else {
@@ -63,7 +95,7 @@ $(function () {
       $('.ajaxLoader').hide();
 
       if (response.error && response.error == 'service unavailable') {
-        alert("The WCG Service is currently unavailable. Please try again later");
+        alert(errors[pageLanguage].wcg_unavailable);
       }
       console.log(response);
       if (response.error && response.error.member_id && response.error.member_id.length > 0) {
@@ -79,7 +111,7 @@ $(function () {
       }
 
       if (response.error && response.error.verification_code && response.error.verification_code.length > 0) {
-        $('#wcgVerificationCodeErrors').text('The WCG username or verification code you entered is incorrect').show();
+        $('#wcgVerificationCodeErrors').text(errors[pageLanguage].verification_code).show();
       } else {
         $('#wcgVerificationCodeErrors').hide();
       }
@@ -110,7 +142,7 @@ $(function () {
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       })
     } else {
-      $('#rippleAddressErrors').text('Please enter a valid Ripple public address').show();
+      $('#rippleAddressErrors').text(errors[pageLanguage].public_address).show();
     }
   });
 
@@ -120,7 +152,7 @@ $(function () {
       $('.ajaxLoader').hide();
 
       if (response.error == 'no registration') {
-        $('#loginErrors').html('You are not registered with computingforgood.org yet. Please sign up ');
+        $('#loginErrors').html(errors[pageLanguage].not_registered);
         $('#loginErrors').append($('<a/>').text('here.').attr('href', '/register')).show();
       } else {
         $('#loginErrors').show();
@@ -146,4 +178,6 @@ $(function () {
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
     })
   });
+
+  setCurrentNavLink();
 });
