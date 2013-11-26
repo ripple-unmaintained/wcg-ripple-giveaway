@@ -16,10 +16,6 @@ class PaymentConfirmationsQueue
   end
 
   def self.queue
-    @queue ||= begin
-      queue = sqs.queues.named(QUEUE_NAME)
-    rescue => e
-      queue = sqs.queues.create(QUEUE_NAME)
-    end
+    @queue ||= sqs.queues.named(QUEUE_NAME)
   end
 end
