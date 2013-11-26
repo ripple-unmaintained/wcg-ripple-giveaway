@@ -1,4 +1,12 @@
+class WcgServiceUnavailable < Exception; end
+
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # protect_from_forgery
+  rescue_from WcgServiceUnavailable, with: :service_unavailable
+
+  def service_unavailable
+    render json: { error: 'service unavailable' }
+  end
+
 end
+
+

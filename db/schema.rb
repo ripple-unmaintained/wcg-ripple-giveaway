@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120200134) do
+ActiveRecord::Schema.define(version: 20131125185314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20131120200134) do
 
   create_table "claims", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.integer  "member_id",          limit: 8
-    t.integer  "rate",               limit: 8
+    t.decimal  "rate"
     t.integer  "points",             limit: 8
     t.integer  "xrp_disbursed",      limit: 8
     t.string   "transaction_hash"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20131120200134) do
     t.integer  "points_claimed",    limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "initial_run_time",  limit: 8
+    t.integer  "initial_points",    limit: 8
+    t.integer  "total_points",      limit: 8
+    t.integer  "total_time",        limit: 8
   end
 
   add_index "users", ["member_id"], name: "index_users_on_member_id", unique: true, using: :btree

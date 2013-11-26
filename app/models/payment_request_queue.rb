@@ -1,9 +1,19 @@
 class PaymentRequestQueue
-  def self.queue
-  	@queue ||= AWS::SQS.new('payment_requests')
-  end
+  QUEUE_NAME = ENV['PAYMENT_REQUESTS_QUEUE_NAME']
+  class << self
 
-  def self.push(hash)
-  	@queue.send_message(hash.to_json)
+    def push(hash)
+      queue.send_message(hash.to_json)
+    end
+
+  protected
+
+    def sqs
+    	@sqs ||= AWS::SQS.new
+    end
+
+    def queue
+      @queue ||= sqs.queues.named(QUEUE_NAME)
+    end
   end
 end

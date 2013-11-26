@@ -1,63 +1,18 @@
-		
-	
-    
 <div id="content">
-	                <section class="main-content border-btm-grey small-padding shadow-off" style="background-color: #3962ae;"><div class="container"><div class="row">
-	<div class="col-md-12">
-			<div class="row">
-	<div class="col-md-12">
-			<div class="special-heading textalignleft default lighter animated-content move_right animate" style="padding-bottom: 0px;"><h1 style="color: #ffffff;" class="fancy default"><span>My Stats</span></h1></div>
-
-	</div> 
 </div>
-	</div> 
-</div></div></section><section class="main-content small-padding shadow-off"><div class="container"><div class="row">
-	<div class="col-md-12">
-			<div class="row">
-	<div class="col-md-12">
-			<div class="special-heading textalignleft default animated-content fade_in animate" style="padding-bottom: 10px;"><h2 class="fancy default"><span>Check Your Stats</span></h2></div>
 
-	<div class="wpb_raw_code wpb_content_element wpb_raw_html">
-		<div class="wpb_wrapper">
-			<form method='post' action='/sessions' id='newSessionForm'>
+<% content_for :javascripts do %>
+  <script>
+    $('#content').html($('#loginTemplate').html());
 
-			<p>
-<a style="color:#818B92; cursor:default;" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/my-stats-2/?preview=true&preview_id=712&preview_nonce=1a9830fc26#" data-toggle="tooltip" data-placement="right" data-original-title="">
-WCG Username
-</a>
-<br>
-<input type="text" name="username" value="" size="40" aria-required="true">
-</p>
-
-<p>
-<a style="color:#818B92; cursor:default;" href="http://localhost:8888/ripplelabs.com/wcg_giveaway.org/my-stats-2/?preview=true&preview_id=712&preview_nonce=1a9830fc26#" data-toggle="tooltip" data-placement="right" data-original-title="Go to your WCG profile, copy your verification code, and paste it here.">
-WCG Verification Code
-</a>
-<br>
-<input type="text" name="verification_code" value="" size="40" aria-required="true">
-</p>
-		</div> 
-	</div> <div class="blank_divider" style="height: 15px;"></div>
-	  </>
-
-<input type='submit' class="button-main button-large animated-content fade_in animate" value="Check My Stats"></input>
-
-	</div> 
-</div>
-	</div> 
-</div></div></section><section class="main-content no-padding shadow-off"><div class="container-fluid"><div class="row">
-	<div class="col-md-12">
-			<div class="divider normal animated-content fade_in animate" style="margin-top: 30px; margin-bottom: 36px;"></div>
-
-	</div> 
-</div></div></section><section class="main-content"><div class="container"><div class="row">
-	<div class="col-md-12">
-			<div class="row">
-	<div class="col-md-12">
-			<div class="text-block animated-content fade_in animate"> <span style="color: #bbbbbb; font-size: 12px;">This giveaway may be discontinued at any time without notice. At any time and without prior notice, Ripple Labs may change the total XRP given away per day, as well as the WCG point to XRP giveaway ratio. Ripple Labs is not affiliated with or endorsed by the World Community Grid, nor do we endorse them. Please report bugs and direct questions about this giveaway to support@ripple.com. Otherwise, please refer to support from WCG for particulars about running their client. Security bugs, in this giveaway, must be reported unused to be eligible for the Ripple XRP Bug Bounty. Please report security bugs in accordance with the bounty rules. If you find a security bug in the World Community Grid, please inform them directly as we have no special access to their team.</span> </div>
-	</div> 
-</div>
-	</div> 
-</div></div></section>
-            </div>
-
+    $(document).on('change:language', function(event, language) {
+      if (language == 'chinese') {
+        chinese = true;
+        $('#content').html($('#loginTemplateChinese').html());
+      } else {
+        chinese = false;
+        $('#content').html($('#loginTemplate').html());
+      }
+    })
+  </script>
+<% end %>
