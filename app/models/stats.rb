@@ -6,7 +6,7 @@ class Stats
       REDIS.set('global_stats',{
         today: 300000,
         total_hours: Wcg.total_hours.to_i,
-        total_xrp: Claim.paid.sum(:xrp_disbursed).to_i
+        total_xrp: Claim.paid.sum(:xrp_disbursed).to_i + 9986000000
       }.to_json)
 
 
