@@ -17,6 +17,8 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
+  REDIS.client.reconnect
+
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
 end
