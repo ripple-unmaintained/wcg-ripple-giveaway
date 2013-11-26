@@ -31,7 +31,7 @@ module Wcg
       username = URI.escape(username)
       verification_code = URI.escape(verification_code)
       url = "https://secure.worldcommunitygrid.org/verifyMember.do?name=#{username}&code=#{verification_code}"
-      response = HTTParty.get(url).parsed_response
+      response = WcgApi.get(url).parsed_response
       if response['Error']
         false
       elsif response['unavailable']

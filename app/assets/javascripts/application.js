@@ -1,16 +1,5 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require_tree .
+//= require underscore-min
+//= require backbone-min
 //= require_self
 
 _.templateSettings = {
@@ -92,6 +81,7 @@ $(function () {
   $('#newUserForm').live('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
+      ga('send', 'event', 'registration', 'failure');
       $('.ajaxLoader').hide();
 
       if (response.error && response.error == 'service unavailable') {
@@ -117,6 +107,7 @@ $(function () {
       }
     }
     function onNewUserCreated (response) {
+      ga('send', 'event', 'registration', 'success');
       $('.ajaxLoader').hide();
       console.log('user created');
       document.location.href='/my-stats';
@@ -149,6 +140,7 @@ $(function () {
   $('#signInForm').live('submit', function (e) {
     e.preventDefault();
     function onError (response) {
+      ga('send', 'event', 'authentication', 'failure');
       $('.ajaxLoader').hide();
 
       if (response.error == 'no registration') {
@@ -159,6 +151,7 @@ $(function () {
       }
     }
     function onSuccess (response) {
+      ga('send', 'event', 'authentication', 'success');
       $('.ajaxLoader').hide();
       document.location.href='/my-stats';
     }
