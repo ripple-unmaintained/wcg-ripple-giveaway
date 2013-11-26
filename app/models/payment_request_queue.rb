@@ -19,6 +19,5 @@ class PaymentRequestQueue
         queue = sqs.queues.create(QUEUE_NAME)
       end
     end
-
   end
 end
