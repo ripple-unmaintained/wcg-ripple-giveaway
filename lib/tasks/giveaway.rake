@@ -61,7 +61,7 @@ def set_rate_for_claims
 end
 
 def submit_pending_claims
-  Claim.unsubmitted.has_rate.each do |claim|
+  Claim.unsubmitted.each do |claim|
     claim.enqueue
     claim.transaction_status = 'submitted'
     claim.save
