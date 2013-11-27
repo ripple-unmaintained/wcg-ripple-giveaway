@@ -70,7 +70,7 @@ task submit_new_claims: :environment do
   end
 end
 
-task :process_confirmations => :environment do
+task :process_claim_payment_confirmations => :environment do
   PaymentConfirmationsQueue.process_confirmed_payments
 end
 

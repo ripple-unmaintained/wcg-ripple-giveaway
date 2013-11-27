@@ -7,9 +7,13 @@ claims
     rake set_rate_for_claims
     rake submit_new_claims
 
-## Re-computign the Aggregate Stats
+## Re-computing the Aggregate Stats
 
     rake update_aggregate_stats
+
+## Processing Confirmed Claimsw
+
+    rake process_claim_payment_confirmations
 
 ## Environment Variables
 
