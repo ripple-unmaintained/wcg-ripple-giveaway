@@ -38,9 +38,13 @@ class User < ActiveRecord::Base
       else
         user.member_id = wcg_response[:member_id]
         member = Wcg.get_team_member(user.username)
-        user.initial_run_time = member['stats'][:RunTime] || 0
-        user.initial_points = member['stats'][:Points] || 0
-        user.save
+        if member.nil?
+          user.errors.add(:member_id, "is not part of the Ripple Labs team")
+        else
+          user.initial_run_time = member['stats'][:RunTime] || 0
+          user.initial_points = member['stats'][:Points] || 0
+          user.save
+        end
       end
       return user
     end
