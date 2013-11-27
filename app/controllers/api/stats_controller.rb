@@ -7,10 +7,11 @@ class Api::StatsController < ApplicationController
       total_run_time = 0
       total_points = 0
 
-      if wcg_user_response['stats']
+      if wcg_user_response && wcg_user_response['stats']
         total_run_time = wcg_user_response['stats'][:RunTime].to_i
         total_points = wcg_user_response['stats'][:Points].to_i
       else
+        wcg_user_response ||= Hash.new
         wcg_user_response['stats'] = Hash.new
       end
 
