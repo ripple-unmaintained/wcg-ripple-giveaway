@@ -10,7 +10,7 @@ A task will properly build and calculate new claims by calling `create_pending_c
 
 ## Processing Confirmed Claimsw
 
-    rake process_claim_payment_confirmations
+    rake claims:process_payment_confirmations
 
 ## Environment Variables
 
