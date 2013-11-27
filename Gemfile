@@ -11,6 +11,8 @@ gem 'aws-sdk'
 gem 'ripple_lib_rpc_ruby', github: 'stevenzeiler/ripple-lib-rpc-ruby'
 gem 'pg'
 
+gem 'newrelic_rpm'
+
 # A concurrent web server is recommended for heroku
 gem 'unicorn'
 

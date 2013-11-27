@@ -63,6 +63,7 @@ GEM
     multi_json (1.8.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
+    newrelic_rpm (3.6.9.171)
     nokogiri (1.5.6)
     pg (0.17.0)
     polyglot (0.3.3)
@@ -125,6 +126,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   httparty
+  newrelic_rpm
   nokogiri
   pg
   pry
