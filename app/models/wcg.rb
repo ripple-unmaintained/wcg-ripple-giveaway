@@ -46,7 +46,7 @@ module Wcg
     end
 
     def parse_stats(member)
-      if member['stats'].empty?
+      if member.nil? || member['stats'].empty?
         return nil
       else
         stats = {}
