@@ -8,7 +8,7 @@ A task will properly build and calculate new claims by calling `create_pending_c
 
     rake update_aggregate_stats
 
-## Processing Confirmed Claimsw
+## Processing Confirmed Claims
 
     rake claims:process_payment_confirmations
 
