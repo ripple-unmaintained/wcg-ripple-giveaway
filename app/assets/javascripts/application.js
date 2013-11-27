@@ -81,7 +81,7 @@ $(function () {
     $('header').html(_.template($('#headerTemplate').html()),{});
   }
 
-  $('#newUserForm').on('submit', function (e) {
+  $('#newUserForm').live('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
       ga('send', 'event', 'registration', 'failure');
