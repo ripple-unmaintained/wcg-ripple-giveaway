@@ -1,6 +1,4 @@
-task create_pending_claims: :environment do
-  team = Wcg.get_team
-
+def create_pending_claims
   # For each user we want to calculate a few things in order to process
   # any new comuting time they have accumulated
 
@@ -32,7 +30,7 @@ task create_pending_claims: :environment do
   end
 end
 
-task set_rate_for_claims: :environment do
+def set_rate_for_claims
   # Fetch all the claims that are still pending, meaning they have not
   # been submitted to the system for disbursion
 
@@ -62,7 +60,7 @@ task set_rate_for_claims: :environment do
   end
 end
 
-task submit_new_claims: :environment do
+def submit_pending_claims
   Claim.unsubmitted.has_rate.each do |claim|
     claim.enqueue
     claim.transaction_status = 'submitted'
@@ -70,7 +68,17 @@ task submit_new_claims: :environment do
   end
 end
 
-task :process_claim_payment_confirmations => :environment do
-  PaymentConfirmationsQueue.process_confirmed_payments
+namespace :claims do
+  task calculate_rate_and_submit_for_payment: :environment do
+    create_pending_claims
+    set_rate_for_claims
+    submit_pending_claims
+  end
+
+  task process_payment_confirmations: :environment do
+    PaymentConfirmationsQueue.process_confirmed_payments
+  end
 end
+
+
 
