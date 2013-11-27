@@ -7,7 +7,11 @@ _.templateSettings = {
   evaluate: /\{\{(.+?)\}\}/g
 };
 
-var pageLanguage = 'english';
+var App ={
+  config: {
+    language: 'english'
+  }
+}
 
 var errors = {
   english: {
@@ -37,7 +41,6 @@ $(function () {
       }
     });
 
-    console.log(matches);
     _.each(matches, function(a) {
       $(a).closest('li').addClass('current_page_item');
     })
@@ -53,7 +56,7 @@ $(function () {
   }
 
   $(document).on('change:language', function(event, language) {
-    pageLanguage = language;
+    App.config.language = language;
     if (language == 'chinese') {
       chinese = true;
       setHeader({ chinese: true });
@@ -78,16 +81,15 @@ $(function () {
     $('header').html(_.template($('#headerTemplate').html()),{});
   }
 
-  $('#newUserForm').live('submit', function (e) {
+  $('#newUserForm').on('submit', function (e) {
     e.preventDefault();
     function onNewUserError (response) {
       ga('send', 'event', 'registration', 'failure');
       $('.ajaxLoader').hide();
 
       if (response.error && response.error == 'service unavailable') {
-        alert(errors[pageLanguage].wcg_unavailable);
+        alert(errors[App.config.language].wcg_unavailable);
       }
-      console.log(response);
       if (response.error && response.error.member_id && response.error.member_id.length > 0) {
         $('#wcgUsernameErrors').text('username ' + response.error.member_id[0]).show();
       } else {
@@ -101,7 +103,7 @@ $(function () {
       }
 
       if (response.error && response.error.verification_code && response.error.verification_code.length > 0) {
-        $('#wcgVerificationCodeErrors').text(errors[pageLanguage].verification_code).show();
+        $('#wcgVerificationCodeErrors').text(errors[App.config.language].verification_code).show();
       } else {
         $('#wcgVerificationCodeErrors').hide();
       }
@@ -109,7 +111,6 @@ $(function () {
     function onNewUserCreated (response) {
       ga('send', 'event', 'registration', 'success');
       $('.ajaxLoader').hide();
-      console.log('user created');
       document.location.href='/my-stats';
     }
 
@@ -133,44 +134,11 @@ $(function () {
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       })
     } else {
-      $('#rippleAddressErrors').text(errors[pageLanguage].public_address).show();
+      $('#rippleAddressErrors').text(errors[App.config.language].public_address).show();
     }
   });
 
-  $('#signInForm').live('submit', function (e) {
-    e.preventDefault();
-    function onError (response) {
-      ga('send', 'event', 'authentication', 'failure');
-      $('.ajaxLoader').hide();
 
-      if (response.error == 'no registration') {
-        $('#loginErrors').html(errors[pageLanguage].not_registered);
-        $('#loginErrors').append($('<a/>').text('here.').attr('href', '/register')).show();
-      } else {
-        $('#loginErrors').show();
-      }
-    }
-    function onSuccess (response) {
-      ga('send', 'event', 'authentication', 'success');
-      $('.ajaxLoader').hide();
-      document.location.href='/my-stats';
-    }
-    $('.ajaxLoader').show();
-    $.ajax({
-      method: 'post',
-      url: '/api/sessions',
-      type: 'json',
-      data: $(this).serialize(),
-      success: function (response) {
-        if (response.error) {
-          onError(response);
-        } else {
-          onSuccess(response);
-        }
-      },
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-    })
-  });
 
   setCurrentNavLink();
 });

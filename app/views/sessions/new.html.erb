@@ -5,7 +5,48 @@
   <script>
     $('#content').html($('#loginTemplate').html());
 
+    function onError (response) {
+      ga('send', 'event', 'authentication', 'failure');
+      $('.ajaxLoader').hide();
+
+      if (response.error == 'no registration') {
+        $('#loginErrors').html(errors[App.config.language].not_registered);
+        $('#loginErrors').append($('<a/>').text('here.').attr('href', '/register')).show();
+      } else {
+        $('#loginErrors').show();
+      }
+    }
+
+    function onSuccess (response) {
+      ga('send', 'event', 'authentication', 'success');
+      $('.ajaxLoader').hide();
+      document.location.href='/my-stats';
+    }
+
+    function login (event) {
+      event.preventDefault();
+
+      $('.ajaxLoader').show();
+      $.ajax({
+        method: 'post',
+        url: '/api/sessions',
+        type: 'json',
+        data: $('form').serialize(),
+        success: function (response) {
+          if (response.error) {
+            onError(response);
+          } else {
+            onSuccess(response);
+          }
+        },
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      })
+    }
+
+    $('input[type="submit"]').on('click', login);
+
     $(document).on('change:language', function(event, language) {
+      $('input[type="submit"]').off('click', login);
       if (language == 'chinese') {
         chinese = true;
         $('#content').html($('#loginTemplateChinese').html());
@@ -13,6 +54,7 @@
         chinese = false;
         $('#content').html($('#loginTemplate').html());
       }
+      $('input[type="submit"]').on('click', login);
     })
   </script>
 <% end %>
