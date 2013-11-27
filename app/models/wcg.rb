@@ -1,6 +1,7 @@
 require 'open-uri'
 
 module Wcg
+  class ServiceUnavailable < Exception; end
   class << self
   	def get_team(opts={})
       if opts[:cached]
