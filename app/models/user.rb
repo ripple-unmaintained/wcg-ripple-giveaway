@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
       else
         user.member_id = wcg_response[:member_id]
         member = Wcg.get_team_member(user.username)
-        if member.nil?
+        if wcg_response[:team_id] != ENV['TEAM_ID']
           user.errors.add(:member_id, "is not part of the Ripple Labs team")
         else
           if member['stats']

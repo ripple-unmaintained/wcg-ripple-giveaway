@@ -38,8 +38,13 @@ module Wcg
       elsif response['unavailable']
         raise WcgServiceUnavailable
       else
+
+        team_points = response['MemberStatsWithTeamHistory']['TeamHistory']['Team']
+
         { member_id: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['MemberId'],
-          username: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['Name'] }
+          username: response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['Name'],
+          team_id: (response['MemberStatsWithTeamHistory']['MemberStats']['MemberStat']['TeamId'] || nil)
+        }
       end
     end
 
