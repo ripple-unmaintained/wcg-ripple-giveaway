@@ -41,8 +41,13 @@ class User < ActiveRecord::Base
         if member.nil?
           user.errors.add(:member_id, "is not part of the Ripple Labs team")
         else
-          user.initial_run_time = member['stats'][:RunTime] || 0
-          user.initial_points = member['stats'][:Points] || 0
+          if member['stats']
+            user.initial_run_time = member['stats'][:RunTime]
+            user.initial_points = member['stats'][:Points]
+          else
+            user.initial_run_time = 0
+            user.initial_points = 0
+          end
           user.save
         end
       end
