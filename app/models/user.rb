@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
         if wcg_response[:team_id] != ENV['TEAM_ID']
           user.errors.add(:member_id, "is not part of the Ripple Labs team")
         else
-          if member['stats']
+          if member && member['stats']
             user.initial_run_time = member['stats'][:RunTime]
             user.initial_points = member['stats'][:Points]
           else
