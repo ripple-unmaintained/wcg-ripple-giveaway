@@ -3809,7 +3809,7 @@ footer {
     vertical-align: middle;
     text-align: center;
     text-transform: uppercase;
-    font-weight: 300; /* 400 */
+    font-weight: 400; /* 400 */
     font-size: 14.5px;
     cursor: pointer;
 	
