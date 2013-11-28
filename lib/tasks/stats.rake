@@ -7,7 +7,7 @@ task recalculate_totals: :environment do
 
   User.all.each do |user|
     puts "User: #{ user.inspect }"
-    puts Wcg.parse_stats(user)
+    puts Wcg.parse_stats(user.wcg_stats)
   end
 
 end
