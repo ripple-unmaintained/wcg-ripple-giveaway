@@ -1,15 +1,16 @@
 ## Running the claimer on all users
 
-A series of tasks will properly build and calculate new
-claims
+A task will properly build and calculate new claims by calling `create_pending_claims`, `set_rate_for_claims`, `submit_pending_claims`.
 
-    rake create_pending_claims
-    rake set_rate_for_claims
-    rake submit_new_claims
+    rake claims:calculate_rate_and_submit_for_payment
 
-## Re-computign the Aggregate Stats
+## Re-computing the Aggregate Stats
 
     rake update_aggregate_stats
+
+## Processing Confirmed Claims
+
+    rake claims:process_payment_confirmations
 
 ## Environment Variables
 

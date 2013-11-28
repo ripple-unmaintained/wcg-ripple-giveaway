@@ -10,12 +10,20 @@ class User < ActiveRecord::Base
     Claim.where(member_id: self.member_id)
   end
 
+  def submitted_claims
+    claims.where(transaction_status: 'submitted')
+  end
+
+  def points_submitted
+    submitted_claims.sum(:points).to_f
+  end
+
   def wcg_stats
     Wcg::get_team(cached: true).select {|member| member['id'] == self.member_id.to_s }[0]
   end
 
-  def wcg_points_earned
-    @wcg_points_earned ||= begin
+  def points_earned
+    @points_earned ||= begin
       stats = Wcg.parse_stats(self.wcg_stats)
       if stats.nil? || stats.empty?
         0.0
