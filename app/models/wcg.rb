@@ -58,8 +58,8 @@ module Wcg
       end
     end
 
-    def get_team_member(name)
-      member = get_team.select { |member| member['name'] == name }[0]
+    def get_team_member(id)
+      member = get_team.select { |member| member['id'] == id.to_s }[0]
       member['stats'] = parse_stats(member) if member
       member
     end

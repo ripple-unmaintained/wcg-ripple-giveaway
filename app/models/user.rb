@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   # add funded boolean
   validates_presence_of :member_id, :ripple_address, :initial_run_time, :initial_points
   validates_uniqueness_of :member_id
-  validate :member_of_ripple_team
 
   def claims
     Claim.where(member_id: self.member_id)
@@ -45,7 +44,7 @@ class User < ActiveRecord::Base
         user.errors.add(:verification_code, "does not match the WCG username")
       else
         user.member_id = wcg_response[:member_id]
-        member = Wcg.get_team_member(user.username)
+        member = Wcg.get_team_member(user.member_id)
         if wcg_response[:team_id] != ENV['TEAM_ID']
           user.errors.add(:member_id, "is not part of the Ripple Labs team")
         else
@@ -72,9 +71,4 @@ class User < ActiveRecord::Base
   	end
   end
 
-  def member_of_ripple_team
-    if !Wcg.get_team_member(self.username)
-      errors.add(:member_id, "must be on the ripple team")
-    end
-  end
 end
