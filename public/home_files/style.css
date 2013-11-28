@@ -94,18 +94,6 @@
   font-weight:  700;
 }
 
-@font-face {
-  font-family: 'Icons';
-  src: url('fonts/Icons.eot'); /* IE9 Compat Modes */
-  src: url('fonts/Icons.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/Icons.woff') format('woff'), /* Modern Browsers */
-       url('fonts/Icons.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/Icons.svg#dc56f0938c09c27a4156bb0f8f5176a2') format('svg'); /* Legacy iOS */
-       
-  font-style:   normal;
-  font-weight:  400;
-}
-
 body,
 input,
 button,
@@ -6056,14 +6044,14 @@ audio, canvas, video {
 /*-----------------------------------------------------------------------------------*/
 
 @font-face {
-	font-family: 'Icons';
-	src:url('_include/css/fonts/Icons.eot');
-	src:url('_include/css/fonts/Icons.eot?#iefix') format('embedded-opentype'),
-		url('_include/css/fonts/Icons.woff') format('woff'),
-		url('_include/css/fonts/Icons.ttf') format('truetype'),
-		url('_include/css/fonts/Icons.svg#Icons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'Icons';
+  src: url('fonts/Icons.eot'); /* IE9 Compat Modes */
+  src: url('fonts/Icons.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/Icons.woff') format('woff'), /* Modern Browsers */
+       url('fonts/Icons.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('fonts/Icons.svg#dc56f0938c09c27a4156bb0f8f5176a2') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  normal;
 }
 
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
