@@ -1,4 +1,4 @@
-def create_pending_claims
+task :create_pending_claims => :environment do
   # For each user we want to calculate a few things in order to process
   # any new comuting time they have accumulated
 
@@ -30,7 +30,7 @@ def create_pending_claims
   end
 end
 
-def set_rate_for_claims
+task :set_rate_for_claims => :environment do
   # Fetch all the claims that are still pending, meaning they have not
   # been submitted to the system for disbursion
 
@@ -60,7 +60,7 @@ def set_rate_for_claims
   end
 end
 
-def submit_pending_claims
+task :submit_pending_claims => :environment do
   Claim.unsubmitted.each do |claim|
     claim.enqueue
     claim.transaction_status = 'submitted'
@@ -69,15 +69,13 @@ def submit_pending_claims
 end
 
 namespace :claims do
-  task calculate_rate_and_submit_for_payment: :environment do
-    create_pending_claims
-    set_rate_for_claims
-    submit_pending_claims
-  end
+
+  task :calculate_rate_and_submit_for_payment => [ :create_pending_claims, :set_rate_for_claims, :submit_pending_claims]
 
   task process_payment_confirmations: :environment do
     PaymentConfirmationsQueue.process_confirmed_payments
   end
+
 end
 
 
