@@ -6001,11 +6001,11 @@ audio, canvas, video {
 
 @font-face {
 	font-family: 'Icons';
-	src:url('_include/css/fonts/Icons.eot');
-	src:url('_include/css/fonts/Icons.eot?#iefix') format('embedded-opentype'),
-		url('_include/css/fonts/Icons.woff') format('woff'),
-		url('_include/css/fonts/Icons.ttf') format('truetype'),
-		url('_include/css/fonts/Icons.svg#Icons') format('svg');
+	src:url('/public/home_files/fonts/Icons.eot');
+	src:url('/public/home_files/fonts/Icons.eot?#iefix') format('embedded-opentype'),
+		url('/public/home_files/fonts/Icons.woff') format('woff'),
+		url('/public/home_files/fonts/Icons.ttf') format('truetype'),
+		url('/public/home_files/fonts/Icons.svg#Icons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
