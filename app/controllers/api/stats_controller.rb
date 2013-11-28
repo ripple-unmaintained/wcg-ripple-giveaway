@@ -1,7 +1,7 @@
 class Api::StatsController < ApplicationController
   def index
     if session[:user]
-      wcg_user_response = Wcg.get_team_member(session[:user][:username])
+      wcg_user_response = Wcg.get_team_member(session[:user][:member_id])
       user = User.where(member_id: session[:user][:member_id]).first
 
       total_run_time = 0
