@@ -46,6 +46,12 @@ task :set_rate_for_claims => :environment do
   total_points_to_be_claimed = claims.inject(0.0){|sum,claim| sum + claim.points}
   xrp_per_point = REDIS.get('xrp_to_give_away').to_f / total_points_to_be_claimed
 
+
+  if ENV['XRP_PER_POINT']
+    xrp_per_point = ENV['XRP_PER_POINT'].to_f
+    puts "Manually set XRP per point to: #{xrp_per_point}"
+  end
+
   claims.each do |claim|
     # Set the rate previously calculated for each claim as part of the
     # current batch of claims
