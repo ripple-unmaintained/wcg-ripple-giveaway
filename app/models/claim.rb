@@ -22,7 +22,7 @@ class Claim < ActiveRecord::Base
     PaymentRequestQueue.push({
       unique_id: self.id,
       ripple_address: user_ripple_address,
-      xrp_amount: self.points / self.rate
+      xrp_amount: self.xrp_disbursed
     })
 
     self.transaction_status = 'submitted'
