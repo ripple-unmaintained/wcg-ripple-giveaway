@@ -1,17 +1,22 @@
 class Stats
   def self.global
-  	if (stats = REDIS.get('global_stats')).present?
+
+    if (stats = REDIS.get('global_stats')).present?
+
       data = JSON.parse(stats)
-  	else
+
+    else
+
       REDIS.set('global_stats',{
-        today: 300000,
+        today: REDIS.get('xrp_to_give_away').to_i,
         total_hours: Wcg.total_hours.to_i,
         total_xrp: Claim.paid.sum(:xrp_disbursed).to_i + 9986000
       }.to_json)
 
-
       self.global
-  	end
+
+    end
+
   end
 
 protected
