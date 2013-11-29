@@ -14,7 +14,7 @@ class Claim < ActiveRecord::Base
 
   def confirm_payment(confirmation)
     self.transaction_hash = confirmation['transaction_hash']
-    self.transaction_hash = confirmation['transaction_status']
+    self.transaction_status = confirmation['transaction_status']
     self.save
   end
 
