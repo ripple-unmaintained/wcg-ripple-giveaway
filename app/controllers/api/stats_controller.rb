@@ -6,6 +6,7 @@ class Api::StatsController < ApplicationController
 
       total_run_time = 0
       total_points = 0
+      total_xrp = 0
 
       if wcg_user_response && wcg_user_response['stats']
         total_run_time = wcg_user_response['stats'][:RunTime].to_i
@@ -16,7 +17,8 @@ class Api::StatsController < ApplicationController
       end
 
       wcg_user_response['stats'][:RunTime] = total_run_time - user.initial_run_time.to_i
-      wcg_user_response['stats'][:Points] = total_points - user.initial_points.to_i
+      wcg_user_response['stats'][:Points] = total_points - user.initial_points
+      wcg_user_response['stats'][:TotalXRP] = user.xrp_earned
 
       render json: { user: wcg_user_response,
       	global: Stats.global

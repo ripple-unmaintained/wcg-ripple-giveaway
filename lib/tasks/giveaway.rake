@@ -16,7 +16,7 @@ task :create_pending_claims => :environment do
 
       # Subtract the total number of points in their WCG profile from the
       # points they have already submitted for claiming
-      points_to_submit =  user.points_earned - user.points_submitted
+      points_to_submit =  user.points_earned - user.points_spent
 
 
       if points_to_submit > 0

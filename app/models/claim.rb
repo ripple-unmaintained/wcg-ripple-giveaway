@@ -4,7 +4,7 @@ class Claim < ActiveRecord::Base
 
   scope :submitted, where(transaction_status: 'submitted')
   scope :unsubmitted, where('transaction_status IS NULL')
-  scope :paid, where(transaction_status: 'paid')
+  scope :paid, where(transaction_status: 'tesSUCCESS')
   scope :needs_rate, where('rate IS NULL')
   scope :has_rate, where('rate IS NOT NULL')
 
