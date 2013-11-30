@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   def xrp_earned
-    claims.paid.sum('xrp_disbursed')
+    Claim.sum('xrp_disbursed', :conditions => {:member_id => self.member_id, :transaction_status => 'tesSUCCESS'})
   end
 
   def points_paid
