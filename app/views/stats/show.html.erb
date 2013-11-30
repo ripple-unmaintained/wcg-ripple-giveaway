@@ -21,7 +21,7 @@
         params.personalXrp = 0;
       } else {
         params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
-        params.personalXrp = 0;
+        params.personalXrp = data.user.stats['TotalXRP'];
       }
       if (chinese) {
         $('#content').html(_.template($('#statsPageTemplateChinese').html(), params));

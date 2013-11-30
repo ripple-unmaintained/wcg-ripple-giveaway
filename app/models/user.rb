@@ -9,12 +9,20 @@ class User < ActiveRecord::Base
     Claim.where(member_id: self.member_id)
   end
 
-  def submitted_claims
-    claims.where(transaction_status: 'submitted')
+  def xrp_earned
+    claims.paid.sum('xrp_disbursed')
+  end
+
+  def points_paid
+    claims.paid.sum('points')
   end
 
   def points_submitted
-    submitted_claims.sum(:points).to_f
+    claims.submitted.sum('points')
+  end
+
+  def points_spent
+    points_submitted + points_paid
   end
 
   def wcg_stats
