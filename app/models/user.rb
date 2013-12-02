@@ -14,15 +14,11 @@ class User < ActiveRecord::Base
   end
 
   def points_paid
-    claims.paid.sum('points')
+    Claim.sum('points', :conditions => {:member_id => self.member_id, :transaction_status => 'tesSUCCESS'})
   end
 
-  def points_submitted
-    claims.submitted.sum('points')
-  end
-
-  def points_spent
-    points_submitted + points_paid
+  def points_claimed
+    Claim.sum('points', :conditions => {:member_id => self.member_id})
   end
 
   def wcg_stats
