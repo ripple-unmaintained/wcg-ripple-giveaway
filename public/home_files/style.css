@@ -45,6 +45,18 @@
 
 -------------------------------------------------------------------------------------*/
 
+/* sean custom */
+    input[type='text'],
+    .wpcf7 input {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .regform_p {
+      width: 50%;
+    }
+
 /*-----------------------------------------------------------------------------------*/
 /*	0.	Font-Family Elements Setup
 /*-----------------------------------------------------------------------------------*/
@@ -1711,7 +1723,7 @@ textarea:focus,
     color: #56646F;
 }
 
-input,
+input[type='text'],
 .wpcf7 input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -7013,8 +7025,7 @@ html[xmlns] .slides {display: block;}
       float: left;
       display: inline-block;
     }
-    
-    /* template normal */
+    /* end custom */
 
     /* Boxed Layout */
 
@@ -7196,6 +7207,7 @@ html[xmlns] .slides {display: block;}
       float: left;
       display: inline-block;
     }
+    /* end custom */
 
     /* Boxed Layout */
 
@@ -7381,6 +7393,16 @@ html[xmlns] .slides {display: block;}
 }
 
 @media (max-width: 480px) {
+
+    /* sean custom */    
+    
+    input[type='text'],
+    .wpcf7 input {
+        width: 100%;
+    }
+    .regform_p {
+      width: 100%;
+    }
 
     /* Boxed Layout */
 
