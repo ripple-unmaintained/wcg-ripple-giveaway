@@ -1,3 +1,5 @@
+RESERVE_AMOUNT = 20
+
 task :create_pending_claims => :environment do
   # For each user we want to calculate a few things in order to process
   # any new comuting time they have accumulated
@@ -19,12 +21,16 @@ task :create_pending_claims => :environment do
       points_to_submit =  user.points_earned - user.points_claimed
 
 
-      if points_to_submit > 0
-        # Create a claim for the user representing all the points they have
-        # earned but which have not yet been submitted to the ripple service
-        # for tabulation. This claim is not yet finished as it still depends
-        # on an XRP rate.
-        user.claims.create(points: points_to_submit)
+      if user.points_paid > 0 || # their account is funded, has returned tesSUCCESS
+         user.points_earned  >= RESERVE_AMOUNT # enough to fund an account
+        if points_to_submit > 0
+            # Create a claim for the user representing all the points they have
+            # earned but which have not yet been submitted to the ripple service
+            # for tabulation. This claim is not yet finished as it still depends
+            # on an XRP rate.
+            user.claims.create(points: points_to_submit)
+          end
+        end
       end
     end
   end
