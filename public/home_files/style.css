@@ -829,7 +829,7 @@ header #logo a:active {
     margin: -6px 0 0 0;
     width: 16px;
     height: 16px;
-    background: url(_include/img/menu-mobile.png) 0 0 no-repeat;
+    background: url(public/menu-mobile.png) 0 0 no-repeat;
     -webkit-transition: -webkit-transform 250ms ease-out 0s;
     -moz-transition: -moz-transform 250ms ease-out 0s;
     -o-transition: -o-transform 250ms ease-out 0s;
