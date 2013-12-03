@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def points_claimed
-    Claim.sum('points', :conditions => {:member_id => self.member_id})
+    Claim.sum('points', :conditions => {:member_id => self.member_id}) - Claim.sum('points', :conditions => {:member_id => self.member_id, :transaction_status => 'tecNO_DST_INSUF_XRP'})
   end
 
   def wcg_stats
