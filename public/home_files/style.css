@@ -7054,15 +7054,6 @@ html[xmlns] .slides {display: block;}
         float: left;
         width: 20%;
     }
-
-    #menu {
-        display: none;
-    }
-
-    #mobile-nav {
-        display: block;
-        float: right;
-    }
 	
 	/* Portfolio and Team Columns */
 	
