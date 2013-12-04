@@ -11,12 +11,12 @@ give out a bonus equal to the `reserve amount` to every user when the attain
 eight hours of computing. One time we need to set all the user's total_time
 and funded status with the following rake task:
 
-    set_initial_user_donated_time
+    rake set_initial_user_donated_time
 
 After the initial task we will run another task daily to disburse the reserve
 amount to everyone who has exceeded the eight hour threshold in the current period:
 
-    update_user_donated_time_and_grant_bonuses
+    rake update_user_donated_time_and_grant_bonuses
 
 ## Re-computing the Aggregate Stats
 
