@@ -45,6 +45,18 @@
 
 -------------------------------------------------------------------------------------*/
 
+/* sean custom */
+    input[type='text'],
+    .wpcf7 input {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .regform_p {
+      width: 50%;
+    }
+
 /*-----------------------------------------------------------------------------------*/
 /*	0.	Font-Family Elements Setup
 /*-----------------------------------------------------------------------------------*/
@@ -829,7 +841,7 @@ header #logo a:active {
     margin: -6px 0 0 0;
     width: 16px;
     height: 16px;
-    background: url(_include/img/menu-mobile.png) 0 0 no-repeat;
+    background: url(public/menu-mobile.png) 0 0 no-repeat;
     -webkit-transition: -webkit-transform 250ms ease-out 0s;
     -moz-transition: -moz-transform 250ms ease-out 0s;
     -o-transition: -o-transform 250ms ease-out 0s;
@@ -1711,7 +1723,7 @@ textarea:focus,
     color: #56646F;
 }
 
-input,
+input[type='text'],
 .wpcf7 input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -6991,29 +7003,29 @@ html[xmlns] .slides {display: block;}
     .map {
         height: 420px;
     }
-    
-   /* Custom */
-  .home_page .main-content.masthead .col-md-6 {
-    width: 50%;
-  }
-  .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
-    float: left;
-  }
-  .home_page .main-content.masthead .col-md-6:nth-of-type(2) {
-    float: right;
-  }
-  .home_page .main-content.home_copy .blank_divider {
-    display: none;
-  }
-  #footer-credits .col-md-4 {
-    width:33%;
-    float: left;
-    display: inline-block;
-  }
-
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+
+     /* sean custom */
+    .home_page .main-content.masthead .col-md-6 {
+      width: 50%;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
+      float: left;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(2) {
+      float: right;
+    }
+    .home_page .main-content.home_copy .blank_divider {
+      display: none;
+    }
+    #footer-credits .col-md-4 {
+      width:33%;
+      float: left;
+      display: inline-block;
+    }
+    /* end custom */
 
     /* Boxed Layout */
 
@@ -7053,15 +7065,6 @@ html[xmlns] .slides {display: block;}
     header .col-md-9 {
         float: left;
         width: 20%;
-    }
-
-    #menu {
-        display: none;
-    }
-
-    #mobile-nav {
-        display: block;
-        float: right;
     }
 	
 	/* Portfolio and Team Columns */
@@ -7185,6 +7188,26 @@ html[xmlns] .slides {display: block;}
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+
+     /* sean custom */
+    .home_page .main-content.masthead .col-md-6 {
+      width: 50%;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
+      float: left;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(2) {
+      float: right;
+    }
+    .home_page .main-content.home_copy .blank_divider {
+      display: none;
+    }
+    #footer-credits .col-md-4 {
+      width:33%;
+      float: left;
+      display: inline-block;
+    }
+    /* end custom */
 
     /* Boxed Layout */
 
@@ -7370,6 +7393,16 @@ html[xmlns] .slides {display: block;}
 }
 
 @media (max-width: 480px) {
+
+    /* sean custom */    
+    
+    input[type='text'],
+    .wpcf7 input {
+        width: 100%;
+    }
+    .regform_p {
+      width: 100%;
+    }
 
     /* Boxed Layout */
 
