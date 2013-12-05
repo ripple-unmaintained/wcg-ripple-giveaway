@@ -1,10 +1,10 @@
 GIT
-  remote: git://github.com/stevenzeiler/ripple-lib-rpc-ruby.git
-  revision: 2347e4c32c9dba5d7beb10eef9302f16fe7e46da
+  remote: git://github.com/stevenzeiler/wcg-gem.git
+  revision: 9b7cf2582365ea1dff6cd7bd95b3769141aa7328
   specs:
-    ripple_lib_rpc_ruby (0.0.1)
-      faraday_middleware
-      hashie
+    wcg (0.0.1)
+      httparty
+      nokogiri
 
 GEM
   remote: https://rubygems.org/
@@ -42,11 +42,6 @@ GEM
     builder (3.1.4)
     coderay (1.1.0)
     erubis (2.7.0)
-    faraday (0.8.8)
-      multipart-post (~> 1.2.0)
-    faraday_middleware (0.9.0)
-      faraday (>= 0.7.4, < 0.9)
-    hashie (2.0.5)
     hike (1.2.3)
     httparty (0.12.0)
       json (~> 1.8)
@@ -62,7 +57,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
     newrelic_rpm (3.6.9.171)
     nokogiri (1.5.6)
     pg (0.17.0)
@@ -134,5 +128,5 @@ DEPENDENCIES
   rails (= 4.0.1)
   rails_12factor
   redis
-  ripple_lib_rpc_ruby!
   unicorn
+  wcg!
