@@ -17,8 +17,8 @@ class Api::StatsController < ApplicationController
       end
 
       wcg_user_response['stats'][:RunTime] = total_run_time - user.initial_run_time.to_i
-      wcg_user_response['stats'][:Points] = total_points - user.initial_points
-      wcg_user_response['stats'][:PersonalXRP] = user.xrp_earned.to_i
+      wcg_user_response['stats'][:Points] = (total_points - user.initial_points).with_delimiter
+      wcg_user_response['stats'][:PersonalXRP] = user.xrp_earned.to_i.with_delimiter
 
       render json: { user: wcg_user_response,
       	global: Stats.global
