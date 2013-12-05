@@ -16,6 +16,18 @@ module Wcg
       end
   	end
 
+    # Return a hash representing each user and the # of hours they have contributed
+    def member_run_times(team) # team = Wcg.get_team
+      team = team.reject {|m| !m['stats'].present? }
+      team.map do |m|
+        hash = {}
+        run_time = m['stats'].select {|d| d[:RunTime].present? }[0][:RunTime]
+        hash[:memberId] = m['id']
+        hash[:hours] = run_time.to_f / 60.0 / 60.0
+        hash
+      end
+    end
+
     def parse_and_set_team
       team = Nokogiri::XML(open(team_url(1, total_team_members + 1))).css('TeamMember').map do |member|
         parse_member(member)

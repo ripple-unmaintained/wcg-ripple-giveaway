@@ -4,6 +4,20 @@ A task will properly build and calculate new claims by calling `create_pending_c
 
     rake claims:calculate_rate_and_submit_for_payment
 
+## Updating the total compute time
+
+In order to ensure that every user has a fundable account we have decided to
+give out a bonus equal to the `reserve amount` to every user when the attain
+eight hours of computing. One time we need to set all the user's total_time
+and funded status with the following rake task:
+
+    rake set_initial_user_donated_time
+
+After the initial task we will run another task daily to disburse the reserve
+amount to everyone who has exceeded the eight hour threshold in the current period:
+
+    rake update_user_donated_time_and_grant_bonuses
+
 ## Re-computing the Aggregate Stats
 
     rake update_aggregate_stats
