@@ -135,6 +135,7 @@ html, hmtl a {
 
 #main {
 	background: #FFFFFF;
+  padding-top: 100px;
 }
 
 #main.sticky-header-enabled {
@@ -867,15 +868,18 @@ header #logo a:active {
 }
 
 #navigation-mobile {
-    position: relative;
+    position: fixed;
     z-index: 21;
     display: none;
     background: #fff;
+    width: 100%;
+    border-bottom: 3px solid #eee;
+    top:100px;
 }
 
 #menu-nav-mobile {
     margin: 0;
-    padding: 10px 0;
+    padding: 0;
 }
 
 #menu-nav-mobile li {
@@ -7054,9 +7058,10 @@ html[xmlns] .slides {display: block;}
 	
     header,
     header.sticky-header {
-        position: relative;
+        position: fixed;
         height: 100px;
         border-bottom: 3px solid #EBEDEF;
+        z-index: 20;
     }
 
     #main.sticky-header-enabled {
@@ -7238,7 +7243,7 @@ html[xmlns] .slides {display: block;}
           margin: 0 0 5px 0;
         }
         #footer-credits .col-md-4:nth-of-type(3) select {
-          float: none;
+          float: none !important;
         }
 /* end custom */
 
@@ -7450,7 +7455,7 @@ html[xmlns] .slides {display: block;}
           margin: 0 0 5px 0;
         }
         #footer-credits .col-md-4:nth-of-type(3) select {
-          float: none;
+          float: none !important;
         }
 /* end sean custom */    
 
