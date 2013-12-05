@@ -1,5 +1,3 @@
-RESERVE_AMOUNT = 20
-
 task :create_pending_claims => :environment do
   # For each user we want to calculate a few things in order to process
   # any new comuting time they have accumulated
@@ -20,17 +18,12 @@ task :create_pending_claims => :environment do
       # points they have already submitted for claiming
       points_to_submit =  user.points_earned - user.points_claimed
 
-
-      if user.points_paid > 0 || # their account is funded, has returned tesSUCCESS
-         user.points_earned  >= RESERVE_AMOUNT # enough to fund an account
-        if points_to_submit > 0
-            # Create a claim for the user representing all the points they have
-            # earned but which have not yet been submitted to the ripple service
-            # for tabulation. This claim is not yet finished as it still depends
-            # on an XRP rate.
-            user.claims.create(points: points_to_submit)
-          end
-        end
+      if points_to_submit > 0
+        # Create a claim for the user representing all the points they have
+        # earned but which have not yet been submitted to the ripple service
+        # for tabulation. This claim is not yet finished as it still depends
+        # on an XRP rate.
+        user.claims.create(points: points_to_submit)
       end
     end
   end
@@ -61,14 +54,14 @@ task :set_rate_for_claims => :environment do
   claims.each do |claim|
     # Set the rate previously calculated for each claim as part of the
     # current batch of claims
-  	claim.rate = xrp_per_point
+    claim.rate = xrp_per_point
 
     # Compute and store the amount of XRP to be disbersed by the processing
     # backend-system
-  	claim.xrp_disbursed = claim.points * xrp_per_point
+    claim.xrp_disbursed = claim.points * xrp_per_point
 
     # Save the claim to be submitted for disbursion of XRP to the user
-  	claim.save
+    claim.save
   end
 end
 
@@ -89,6 +82,3 @@ namespace :claims do
   end
 
 end
-
-
-
