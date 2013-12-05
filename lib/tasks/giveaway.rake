@@ -1,4 +1,5 @@
 task :create_pending_claims => :environment do
+  team = Wcg.get_team
   # For each user we want to calculate a few things in order to process
   # any new comuting time they have accumulated
 
@@ -8,7 +9,10 @@ task :create_pending_claims => :environment do
   User.all.each do |user|
     # Calculate the total number of points the user has accumulated by
     # subtracting the amount of points they had when they registered
-    if user.points_earned > 0
+    wcg_team_member = team.find_member_by_id(user.member_id)
+    points_earned = wcg_team_member.points - user.initial_points
+
+    if points_earned > 0
 
       # Sum all the claims they have submitted
       # this will be used to determine how many points they should claim
@@ -16,7 +20,7 @@ task :create_pending_claims => :environment do
 
       # Subtract the total number of points in their WCG profile from the
       # points they have already submitted for claiming
-      points_to_submit =  user.points_earned - user.points_claimed
+      points_to_submit = points_earned - user.points_claimed
 
       if points_to_submit > 0
         # Create a claim for the user representing all the points they have
