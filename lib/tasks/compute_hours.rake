@@ -21,8 +21,10 @@ task :update_user_donated_time_and_grant_bonuses => :environment do
     member_hours = member.hours_contributed
     user = User.where(member_id: member.id).first
     if user.present?
-      if (user.total_time / 60.0 / 60.0) < 8 # time before is < eight hours
+      if user.total_time && ((user.total_time / 60.0 / 60.0) < 8) # time before is < eight hours
+        puts 'were under eight hours'
         if member.hours_contributed > 8 # time after is > eight hours
+          puts 'are over eight hours'
           # the user has just gone over the eight hour threshold today!
           # give them a bonus!
           claim = user.claim.create(rate: 1, xrp_disbursed: RESERVE_AMOUNT, points: 1)
