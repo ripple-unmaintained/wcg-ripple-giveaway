@@ -45,6 +45,18 @@
 
 -------------------------------------------------------------------------------------*/
 
+/* sean custom */
+    input[type='text'],
+    .wpcf7 input {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .regform_p {
+      width: 50%;
+    }
+
 /*-----------------------------------------------------------------------------------*/
 /*	0.	Font-Family Elements Setup
 /*-----------------------------------------------------------------------------------*/
@@ -123,6 +135,7 @@ html, hmtl a {
 
 #main {
 	background: #FFFFFF;
+  padding-top: 100px;
 }
 
 #main.sticky-header-enabled {
@@ -613,11 +626,12 @@ h6 {
 /*-----------------------------------------------------------------------------------*/
 
 header {
-    position: relative;
+    position: fixed;
 	background: #fff;
     width: 100%;
     height: 100px;
     border-bottom: 3px solid #EBEDEF;
+    z-index: 20;
 }
 
 header.sticky-header {
@@ -829,7 +843,7 @@ header #logo a:active {
     margin: -6px 0 0 0;
     width: 16px;
     height: 16px;
-    background: url(_include/img/menu-mobile.png) 0 0 no-repeat;
+    background: url(/menu-mobile.png) 0 0 no-repeat;
     -webkit-transition: -webkit-transform 250ms ease-out 0s;
     -moz-transition: -moz-transform 250ms ease-out 0s;
     -o-transition: -o-transform 250ms ease-out 0s;
@@ -855,16 +869,18 @@ header #logo a:active {
 }
 
 #navigation-mobile {
-    position: relative;
+    position: fixed;
     z-index: 21;
     display: none;
-    background: #303440;
-	border-top: 1px solid #ddd;
+    background: #fff;
+    width: 100%;
+    border-bottom: 3px solid #eee;
+    top:100px;
 }
 
 #menu-nav-mobile {
     margin: 0;
-    padding: 10px 0;
+    padding: 0;
 }
 
 #menu-nav-mobile li {
@@ -880,9 +896,9 @@ header #logo a:active {
 	position: relative;
     display: block;
     padding: 15px 0;
-    color: #FFFFFF;
+    color: #303440;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #navigation-mobile li a:hover {
@@ -1712,7 +1728,7 @@ textarea:focus,
     color: #56646F;
 }
 
-input,
+input[type='text'],
 .wpcf7 input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -6992,10 +7008,40 @@ html[xmlns] .slides {display: block;}
     .map {
         height: 420px;
     }
-
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+
+/* sean custom */  
+     /* home */
+    .home_page .main-content.masthead .col-md-6 {
+      width: 50%;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
+      float: left;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(2) {
+      float: right;
+    }
+    .home_page .main-content.home_copy .blank_divider {
+      display: none;
+    }
+    
+    /* register */
+    input[type='text'],
+    .wpcf7 input {
+        width: 80%;
+    }
+    .regform_p {
+      width: 80%;
+    }
+    
+    #footer-credits .col-md-4 {
+      width:33%;
+      float: left;
+      display: inline-block;
+    }
+/* end sean custom */
 
     /* Boxed Layout */
 
@@ -7013,9 +7059,10 @@ html[xmlns] .slides {display: block;}
 	
     header,
     header.sticky-header {
-        position: relative;
+        position: fixed;
         height: 100px;
         border-bottom: 3px solid #EBEDEF;
+        z-index: 20;
     }
 
     #main.sticky-header-enabled {
@@ -7026,24 +7073,14 @@ html[xmlns] .slides {display: block;}
         /* font-size: 24px; */
         line-height: 100px;
     }
-
     header .col-md-3 {
         float: left;
-        width: 80%;
+        width: 50%;
     }
 
     header .col-md-9 {
         float: left;
-        width: 20%;
-    }
-
-    #menu {
-        display: none;
-    }
-
-    #mobile-nav {
-        display: block;
-        float: right;
+        width: 50%;
     }
 	
 	/* Portfolio and Team Columns */
@@ -7145,12 +7182,13 @@ html[xmlns] .slides {display: block;}
         box-sizing: border-box;
     }
 
-    /* Social Footer */
+    /* Social Footer 
 
     #social-footer {
         float: left;
         margin-top: 20px;
     }
+    */
 
     /* Map */
 
@@ -7167,6 +7205,49 @@ html[xmlns] .slides {display: block;}
 
 @media (min-width: 481px) and (max-width: 767px) {
 
+/* sean custom */
+    /* home */
+    .home_page .main-content.masthead .col-md-6 {
+      width: 50%;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
+      float: left;
+    }
+    .home_page .main-content.masthead .col-md-6:nth-of-type(2) {
+      float: right;
+    }
+    .home_page .main-content.home_copy .blank_divider {
+      display: none;
+    }
+    
+    /* register */
+    input[type='text'],
+    .wpcf7 input {
+        width: 80%;
+    }
+    .regform_p {
+      width: 80%;
+    }
+    
+    /* footer */
+    #footer-credits .col-md-4 {
+      width:100%;
+      float: none;
+      display:block;text-align: center;
+      margin-bottom: 25px;
+    }
+        #footer-credits .col-md-4:nth-of-type(3) #social-footer {
+          width:100%;
+          margin-top: 0;
+        }
+        #footer-credits .col-md-4:nth-of-type(3) #social-footer ul li a {
+          margin: 0 0 5px 0;
+        }
+        #footer-credits .col-md-4:nth-of-type(3) select {
+          float: none !important;
+        }
+/* end custom */
+
     /* Boxed Layout */
 
     .wrap_all.boxed {
@@ -7182,9 +7263,10 @@ html[xmlns] .slides {display: block;}
 	
     header,
     header.sticky-header {
-        position: relative;
+        position: fixed;
         height: 100px;
         border-bottom: 3px solid #EBEDEF;
+        z-index: 20;
     }
 
     #main.sticky-header-enabled {
@@ -7310,12 +7392,13 @@ html[xmlns] .slides {display: block;}
         box-sizing: border-box;
     }
 
-    /* Social Footer */
+    /* Social Footer
 
     #social-footer {
         float: left;
         margin-top: 20px;
     }
+     */
 
     /* Map */
 
@@ -7352,6 +7435,32 @@ html[xmlns] .slides {display: block;}
 
 @media (max-width: 480px) {
 
+/* sean custom */    
+    input[type='text'],
+    .wpcf7 input {
+        width: 100%;
+    }
+    .regform_p {
+        width: 100%;
+    }
+    #footer-credits .col-md-4 {
+      width:100%;
+      float: none;
+      display:block;text-align: center;
+      margin-bottom: 25px;
+    }
+        #footer-credits .col-md-4:nth-of-type(3) #social-footer {
+          width:100%;
+          margin-top: 0;
+        }
+        #footer-credits .col-md-4:nth-of-type(3) #social-footer ul li a {
+          margin: 0 0 5px 0;
+        }
+        #footer-credits .col-md-4:nth-of-type(3) select {
+          float: none !important;
+        }
+/* end sean custom */    
+
     /* Boxed Layout */
 
     .wrap_all.boxed {
@@ -7368,9 +7477,10 @@ html[xmlns] .slides {display: block;}
 	
     header,
     header.sticky-header {
-        position: relative;
+        position: fixed;
         height: 100px;
         border-bottom: 3px solid #EBEDEF;
+        z-index: 20;
     }
 
     #main.sticky-header-enabled {
@@ -7496,12 +7606,12 @@ html[xmlns] .slides {display: block;}
         box-sizing: border-box;
     }
 
-    /* Social Footer */
-
+    /* Social Footer
     #social-footer {
         float: left;
         margin-top: 20px;
     }
+    */
 
     /* Map */
 

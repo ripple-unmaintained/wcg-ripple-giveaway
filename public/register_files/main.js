@@ -32,7 +32,7 @@ CHARIOT.mobileNav = function(){
 	var windowWidth = $(window).width();
 	
 	// Show Menu or Hide the Menu
-	if( windowWidth >= 979 ) {
+	if( windowWidth >= 767 ) {
 		$('#navigation-mobile').css('display', 'none');
 		if ($('#mobile-nav').hasClass('open')) {
 			$('#mobile-nav').removeClass('open');	
