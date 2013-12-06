@@ -1,3 +1,5 @@
+require 'fixnum'
+
 class Stats
   def self.global
     if (stats = REDIS.get('global_stats')).present?
