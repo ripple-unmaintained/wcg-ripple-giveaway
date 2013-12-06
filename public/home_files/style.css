@@ -7014,6 +7014,8 @@ html[xmlns] .slides {display: block;}
 
 /* sean custom */  
      /* home */
+    .home_page .main-content.masthead {
+    }
     .home_page .main-content.masthead .col-md-6 {
       width: 50%;
     }
@@ -7208,10 +7210,14 @@ html[xmlns] .slides {display: block;}
 
 /* sean custom */
     /* home */
+    .home_page .main-content.masthead {
+      text-align: center;
+    }
     .home_page .main-content.masthead .col-md-6 {
-      width: 100%;
+      width: 81%;
       text-align: left;
       float: none;
+      margin: 0 auto;
     }
     .home_page .main-content.masthead .col-md-6:nth-of-type(1) {
     }
