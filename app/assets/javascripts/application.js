@@ -81,8 +81,24 @@ $(function () {
     $('header').html(_.template($('#headerTemplate').html()),{});
   }
 
-  $('#newUserForm').live('submit', function (e) {
+  function handleNewUserFormSubmit(e) {
     e.preventDefault();
+    $('.errors').hide();
+    $('.ajaxLoader').show();
+
+
+    if ($('input[name="username"]').val() == '') {
+      $('.ajaxLoader').hide();
+      $('#wcgUsernameErrors').text('username must not be blank').show();
+      return false
+    }
+
+    if ($('input[name="verification_code"]').val() == '') {
+      $('.ajaxLoader').hide();
+      $('#wcgVerificationCodeErrors').text('verification code must not be blank').show();
+      return false
+    }
+
     function onNewUserError (response) {
       ga('send', 'event', 'registration', 'failure');
       $('.ajaxLoader').hide();
@@ -134,9 +150,12 @@ $(function () {
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       })
     } else {
+      $('.ajaxLoader').hide();
       $('#rippleAddressErrors').text(errors[App.config.language].public_address).show();
     }
-  });
+  }
+
+  $('#newUserForm').live('submit', handleNewUserFormSubmit);
 
 
 
