@@ -10,24 +10,26 @@ task :create_pending_claims => :environment do
     # Calculate the total number of points the user has accumulated by
     # subtracting the amount of points they had when they registered
     wcg_team_member = team.find_member_by_id(user.member_id)
-    points_earned = wcg_team_member.points - user.initial_points
+    if wcg_team_member
+      points_earned = wcg_team_member.points - user.initial_points
 
-    if points_earned > 0
+      if points_earned > 0
 
-      # Sum all the claims they have submitted
-      # this will be used to determine how many points they should claim
-      # during this round of processing of points
+        # Sum all the claims they have submitted
+        # this will be used to determine how many points they should claim
+        # during this round of processing of points
 
-      # Subtract the total number of points in their WCG profile from the
-      # points they have already submitted for claiming
-      points_to_submit = points_earned - user.points_claimed
+        # Subtract the total number of points in their WCG profile from the
+        # points they have already submitted for claiming
+        points_to_submit = points_earned - user.points_claimed
 
-      if points_to_submit > 0
-        # Create a claim for the user representing all the points they have
-        # earned but which have not yet been submitted to the ripple service
-        # for tabulation. This claim is not yet finished as it still depends
-        # on an XRP rate.
-        user.claims.create(points: points_to_submit)
+        if points_to_submit > 0
+          # Create a claim for the user representing all the points they have
+          # earned but which have not yet been submitted to the ripple service
+          # for tabulation. This claim is not yet finished as it still depends
+          # on an XRP rate.
+          user.claims.create(points: points_to_submit)
+        end
       end
     end
   end
