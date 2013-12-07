@@ -1,31 +1,48 @@
 <% content_for :javascripts do %>
+
 	<script>
-	  var wcgStats,
+    function merge_options(obj1,obj2){
+      var obj3 = {};
+      for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+      for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+      return obj3;
+    }
+
+	  var wcgStats = {
+          total_xrp: '',
+          total_hours: '',
+          today: ''
+        },
 	      chinese = false;
 
       $.getJSON('/api/stats/global', function(stats) {
-      	wcgStats = stats;
+      	wcgStats = merge_options({
+          total_xrp: '',
+          total_hours: '',
+          today: ''
+        },stats);
+        console.log(wcgStats);
       	if (chinese) {
-      		setChinese(stats);
+      		setChinese(wcgStats);
       	} else {
-      		setEnglish(stats);
+      		setEnglish(wcgStats);
       	}
       });
 
       function setChinese (stats) {
-      	var html = _.template($('#homeTemplateChinese').html(), stats);
+      	var html = _.template($('#homeTemplateChinese').html(), wcgStats);
         $('#main').html(html);
       }
 
       function setEnglish (stats) {
-      	var html = _.template($('#homeTemplate').html(), stats);
+      	var html = _.template($('#homeTemplate').html(),wcgStats);
         $('#main').html(html);
       }
 
       if (chinese) {
-        $('header').html(_.template($('#headerTemplateChinese').html()),{});
+        $('header').html(_.template($('#headerTemplateChinese').html(),wcgStats));
       } else {
-        $('header').html(_.template($('#headerTemplate').html()),{});
+        $('header').html(_.template($('#headerTemplate').html(),wcgStats));
       }
 
       $(document).on('change:language', function(event, language) {
