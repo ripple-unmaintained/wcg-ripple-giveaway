@@ -2,6 +2,7 @@ require 'csv'
 
 task :update_failed_claims_that_actually_succeeded => :environment do
   CSV.parse(STDIN.read).each do |row|
+    claim_id = row[0]
     begin
       claim_id = row[0]
       claim = Claim.find(claim_id)
