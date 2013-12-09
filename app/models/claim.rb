@@ -26,6 +26,17 @@ class Claim < ActiveRecord::Base
     self.save
   end
 
+  def duplicate_and_retry
+    duplicate = self.dup
+    duplicate.transaction_status = nil
+    duplicate.transaction_hash = nil
+    duplicate.save
+    if duplicate.persisted?
+      self.destroy
+      duplicate.enqueue
+    end
+  end
+
   def enqueue
     PaymentRequestQueue.push({
       unique_id: self.id,
