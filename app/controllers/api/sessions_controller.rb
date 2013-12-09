@@ -18,4 +18,9 @@ class Api::SessionsController < ApplicationController
   def show
     render json: session[:user]
   end
+
+  def language
+    session[:language] = params[:language]
+    render json: { language: params[:language] }
+  end
 end

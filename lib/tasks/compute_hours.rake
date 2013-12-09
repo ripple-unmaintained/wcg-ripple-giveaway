@@ -15,14 +15,27 @@ task :set_initial_user_donated_time => :environment do
   end
 end
 
+task :grant_bonuses_to_those_over_eight_hours do
+  users = User.all.reject { |user|
+    (user.total_time / 60.0 /60.0 rescue 0) <= 8;
+  }
+
+  users.each do |user|
+    claim = user.claims.create(rate: 0, points: 0, xrp_disbursed: 20)
+    claim.enqueue
+  end
+end
+
 task :update_user_donated_time_and_grant_bonuses => :environment do
   # download the run times in hours for each user on the team
   Wcg.get_team.members.each do |member|
     member_hours = member.hours_contributed
     user = User.where(member_id: member.id).first
     if user.present?
-      if (user.total_time / 60.0 / 60.0) < 8 # time before is < eight hours
+      if user.total_time && ((user.total_time / 60.0 / 60.0) < 8) # time before is < eight hours
+        puts 'were under eight hours'
         if member.hours_contributed > 8 # time after is > eight hours
+          puts 'are over eight hours'
           # the user has just gone over the eight hour threshold today!
           # give them a bonus!
           claim = user.claim.create(rate: 1, xrp_disbursed: RESERVE_AMOUNT, points: 1)

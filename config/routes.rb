@@ -4,6 +4,7 @@ WcgGiveaway::Application.routes.draw do
   	resources :stats, only: :index
     get 'stats/global', to: 'stats#global'
     resources :sessions, only: :create
+    post 'session/language', to: 'sessions#language'
     get 'session', to: 'sessions#show'
   end
 

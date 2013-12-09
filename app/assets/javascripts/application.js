@@ -67,6 +67,18 @@ $(function () {
   })
 
   $('select').on('change', function (e){
+    var language = $(this).val();
+    $.ajax({
+      method: 'post',
+      url: '/api/session/language',
+      type: 'json',
+      data: {
+        language: language
+      },
+      complete: function () { console.log('session updated', language)},
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    })
+
     if ($(this).val() == 'chinese') {
       $(document).trigger('change:language', 'chinese');
     } else {
