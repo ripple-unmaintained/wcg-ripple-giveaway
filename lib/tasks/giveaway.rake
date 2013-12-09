@@ -22,6 +22,41 @@ task :create_new_claims_for_failed_claims => :environment do
   failures = []
   CSV.parse(STDIN.read).each do |row|
     begin
+      claim_id = row[0]
+      claim = Claim.find(claim_id)
+
+      status = row[-1].to_i
+      case status
+      when 0 # was not successful, retry
+        # create a new claim and delete the old one
+        new_claim = Claim.create(
+          member_id: row[1].to_i,
+          rate: row[2],
+          points: row[3],
+          xrp_disbursed: row[4])
+        if new_claim.valid?
+          puts 'created a new claim'
+          claim.destroy # destroy the old claim
+        else
+          failures.push(claim_id)
+          puts 'could not create a new claim.'
+        end
+      end
+    rescue
+      puts "claim not found #{claim_id}"
+    end
+  end
+
+  if failures.length > 0
+    puts 'some claims could not be re-submitted'
+    puts failures
+  end
+end
+
+task :create_new_claims_for_failed_claims => :environment do
+  failures = []
+  CSV.parse(STDIN.read).each do |row|
+    begin
       claim = Claim.find(claim_id)
 
       status = row[-1].to_i
