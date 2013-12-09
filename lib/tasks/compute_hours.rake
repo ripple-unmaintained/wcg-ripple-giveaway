@@ -38,7 +38,7 @@ task :update_user_donated_time_and_grant_bonuses => :environment do
           puts 'are over eight hours'
           # the user has just gone over the eight hour threshold today!
           # give them a bonus!
-          claim = user.claim.create(rate: 1, xrp_disbursed: RESERVE_AMOUNT, points: 1)
+          claim = user.claims.create(rate: 1, xrp_disbursed: RESERVE_AMOUNT, points: 1)
           claim.enqueue
           user.funded = true
         end
