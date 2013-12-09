@@ -8,7 +8,7 @@ gem 'httparty'
 gem 'redis'
 gem 'rack-timeout'
 gem 'aws-sdk'
-gem 'ripple_lib_rpc_ruby', github: 'stevenzeiler/ripple-lib-rpc-ruby'
+gem 'wcg', github: 'stevenzeiler/wcg-gem'
 gem 'pg'
 
 gem 'newrelic_rpm'

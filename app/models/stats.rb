@@ -1,17 +1,17 @@
+require 'fixnum'
+
 class Stats
   def self.global
-  	if (stats = REDIS.get('global_stats')).present?
+    if (stats = REDIS.get('global_stats')).present?
       data = JSON.parse(stats)
-  	else
+    else
       REDIS.set('global_stats',{
-        today: 300000,
-        total_hours: Wcg.total_hours.to_i,
-        total_xrp: Claim.paid.sum(:xrp_disbursed).to_i + 9986000
+        today: REDIS.get('xrp_to_give_away').to_i.with_delimiter,
+        total_hours: Wcg.get_team.total_hours.to_i.with_delimiter,
+        total_xrp: (Claim.paid.sum(:xrp_disbursed).to_i + 9986000).with_delimiter
       }.to_json)
-
-
       self.global
-  	end
+    end
   end
 
 protected

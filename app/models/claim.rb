@@ -4,7 +4,7 @@ class Claim < ActiveRecord::Base
 
   scope :submitted, where(transaction_status: 'submitted')
   scope :unsubmitted, where('transaction_status IS NULL')
-  scope :paid, where(transaction_status: 'paid')
+  scope :paid, where(transaction_status: 'tesSUCCESS')
   scope :needs_rate, where('rate IS NULL')
   scope :has_rate, where('rate IS NOT NULL')
 
@@ -26,7 +26,7 @@ class Claim < ActiveRecord::Base
 
   def confirm_payment(confirmation)
     self.transaction_hash = confirmation['transaction_hash']
-    self.transaction_hash = confirmation['transaction_status']
+    self.transaction_status = confirmation['transaction_status']
     self.save
   end
 
@@ -45,7 +45,7 @@ class Claim < ActiveRecord::Base
     PaymentRequestQueue.push({
       unique_id: self.id,
       ripple_address: user_ripple_address,
-      xrp_amount: self.points / self.rate
+      xrp_amount: self.xrp_disbursed
     })
 
     self.transaction_status = 'submitted'

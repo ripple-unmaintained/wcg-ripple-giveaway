@@ -1,13 +1,12 @@
 class Api::SessionsController < ApplicationController
   def create
-    if (wcg_user_response = Wcg.verify_user(params[:username], params[:verification_code]))
-      if User.where(member_id: wcg_user_response[:member_id]).present?
-        if wcg_user_response != :service_unavailable
-          session[:user] = wcg_user_response
-          render json: wcg_user_response
-        else
-          render json: { error: 'service unavailable' }
-        end
+    if (wcg_user = Wcg.verify_user(params.require(:username), params.require(:verification_code)))
+      if User.where(member_id: wcg_user.id).present?
+        session[:user] = {
+          member_id: wcg_user.id,
+          username: wcg_user.name
+        }
+        render json: wcg_user
       else
         render json: { error: 'no registration' }
       end
@@ -18,5 +17,10 @@ class Api::SessionsController < ApplicationController
 
   def show
     render json: session[:user]
+  end
+
+  def language
+    session[:language] = params[:language]
+    render json: { language: params[:language] }
   end
 end

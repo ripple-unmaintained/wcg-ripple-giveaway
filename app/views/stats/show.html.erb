@@ -8,6 +8,10 @@
   $ = jQuery;
   $(function () {
 
+    function showHeader() {
+      $('#content').html(_.template($('#statsPageHeaderTemplate').html(),{}));
+    }
+
     function displayMyData (data, chinese) {
       $('.ajaxLoader').hide();
 
@@ -16,13 +20,8 @@
         username: data.user.name
       }
       _.extend(params, data.global);
-      if (data.user.stats.length < 1) {
-        params.personalHours = 0;
-        params.personalXrp = 0;
-      } else {
-        params.personalHours = Math.round(data.user.stats['RunTime'] / 60.0 / 60.0);
-        params.personalXrp = 0;
-      }
+      params.personalHours = Math.round(data.user.run_time / 60.0 / 60.0);
+      params.personalXrp = data.user.xrp;
       if (chinese) {
         $('#content').html(_.template($('#statsPageTemplateChinese').html(), params));
       } else {
@@ -32,6 +31,7 @@
       $('.ajaxLoader').hide();
     }
 
+    showHeader();
     $.getJSON('/api/stats', function(data) {
       myData = data;
       $('.ajaxLoader').hide();
