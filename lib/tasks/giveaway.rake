@@ -1,3 +1,57 @@
+require 'csv'
+
+task :update_failed_claims_that_actually_succeeded => :environment do
+  CSV.parse(STDIN.read).each do |row|
+    begin
+      claim_id = row[0]
+      claim = Claim.find(claim_id)
+
+      status = row[-1].to_i
+      case status
+      when 1 # was actually successful
+        claim.transaction_status = 'tesSUCCESS'
+        claim.save
+      end
+    rescue
+      puts "claim not found #{claim_id}"
+    end
+  end
+end
+
+task :create_new_claims_for_failed_claims => :environment do
+  failures = []
+  CSV.parse(STDIN.read).each do |row|
+    begin
+      claim = Claim.find(claim_id)
+
+      status = row[-1].to_i
+      case status
+      when 0 # was not successful, retry
+        # create a new claim and delete the old one
+        new_claim = Claim.create(
+          member_id: row[1].to_i,
+          rate: row[2],
+          points: row[3],
+          xrp_disbursed: row[4])
+        if new_claim.valid?
+          puts 'created a new claim'
+          claim.destroy # destroy the old claim
+        else
+          failures.push(claim_id)
+          puts 'could not create a new claim.'
+        end
+      end
+    rescue
+      puts "claim not found #{claim_id}"
+    end
+  end
+
+  if failures.length > 0
+    puts 'some claims could not be re-submitted'
+    puts failures
+  end
+end
+
 task :create_pending_claims => :environment do
   team = Wcg.get_team
   # For each user we want to calculate a few things in order to process
@@ -10,24 +64,26 @@ task :create_pending_claims => :environment do
     # Calculate the total number of points the user has accumulated by
     # subtracting the amount of points they had when they registered
     wcg_team_member = team.find_member_by_id(user.member_id)
-    points_earned = wcg_team_member.points - user.initial_points
+    if wcg_team_member
+      points_earned = wcg_team_member.points - user.initial_points
 
-    if points_earned > 0
+      if points_earned > 0
 
-      # Sum all the claims they have submitted
-      # this will be used to determine how many points they should claim
-      # during this round of processing of points
+        # Sum all the claims they have submitted
+        # this will be used to determine how many points they should claim
+        # during this round of processing of points
 
-      # Subtract the total number of points in their WCG profile from the
-      # points they have already submitted for claiming
-      points_to_submit = points_earned - user.points_claimed
+        # Subtract the total number of points in their WCG profile from the
+        # points they have already submitted for claiming
+        points_to_submit = points_earned - user.points_claimed
 
-      if points_to_submit > 0
-        # Create a claim for the user representing all the points they have
-        # earned but which have not yet been submitted to the ripple service
-        # for tabulation. This claim is not yet finished as it still depends
-        # on an XRP rate.
-        user.claims.create(points: points_to_submit)
+        if points_to_submit > 0
+          # Create a claim for the user representing all the points they have
+          # earned but which have not yet been submitted to the ripple service
+          # for tabulation. This claim is not yet finished as it still depends
+          # on an XRP rate.
+          user.claims.create(points: points_to_submit)
+        end
       end
     end
   end
