@@ -169,9 +169,15 @@ task :submit_pending_claims => :environment do
   end
 end
 
+task :retry_claims_from_accounts_that_are_now_funded => :environment do
+  claims = Claim.where(transaction_status: 'tecNO_DST_INSUF_XRP').select{|c| c.user.funded? }
+  claims.collect(&:duplicate_and_retry)
+end
+
 namespace :claims do
 
   task :calculate_rate_and_submit_for_payment => [ :create_pending_claims, :set_rate_for_claims, :submit_pending_claims]
+  task :grant_bonuses_and_fund_accounts => [:update_user_donated_time_and_grant_bonuses, :retry_claims_from_accounts_that_are_now_funded]
 
   task process_payment_confirmations: :environment do
     PaymentConfirmationsQueue.process_confirmed_payments
