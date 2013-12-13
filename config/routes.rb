@@ -8,6 +8,8 @@ WcgGiveaway::Application.routes.draw do
     get 'session', to: 'sessions#show'
   end
 
+  get 'users/by-ripple-address/:ripple_address', to: 'users#show'
+  get 'users/by-username/:username', to: 'users#show'
   get 'register', to: 'users#new'
   get 'my-stats', to: 'stats#show'
 
