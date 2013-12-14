@@ -1,0 +1,86 @@
+<div id='content'>
+<%= render 'partials/users_search' %>
+
+<section class="main-content">
+<% if !@user.present? %>
+  <h1 style='text-align:center'>user not found</h1>
+<% else %>
+	<h2>User</h2>
+	<table>
+		<thead>
+			<tr>
+				<td>username</td>
+				<td>ripple address</td>
+				<td>created at</td>
+				<td>initial run time</td>
+				<td>initial points</td>
+				<td>points paid</td>
+				<td>points claimed</td>
+				<td>xrp earned</td>
+				<td>total claims</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%= @user.username %></td>
+				<td><%= @user.ripple_address %></td>
+				<td><%= @user.created_at %></td>
+				<td><%= @user.initial_run_time %></td>
+				<td><%= @user.initial_points %></td>
+				<td><%= @user.points_paid %></td>
+				<td><%= @user.points_claimed %></td>
+				<td><%= @user.xrp_earned %></td>
+				<td><%= @user.claims.count %></td>
+			<tr/>
+		</tbody>
+	</table>
+
+	<h2>Claims</h2>
+	<table>
+		<thead>
+			<tr>
+				<td>id</td>
+				<td>created_at</td>
+				<td>rate</td>
+				<td>points</td>
+				<td>xrp</td>
+				<td>transaction hash</td>
+				<td>transaction_status</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% @user.claims.each do |claim| %>
+				<tr>
+					<td><%= claim.id %></td>
+					<td><%= claim.created_at %></td>
+					<td><%= claim.rate.to_f %></td>
+					<td><%= claim.points.to_f %></td>
+					<td><%= claim.xrp_disbursed.to_f %></td>
+					<td><%= claim.transaction_hash %></td>
+					<td><%= claim.transaction_status %></td>
+				<tr/>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+</section>
+</div>
+
+
+<% content_for :styles do %>
+	tr { 
+		border-bottom: 1px solid #ccc
+	}
+	
+	td {
+		padding: 5px 
+	}
+	.main-content, .main-content table, .search {
+		margin: 0 auto;
+		text-align:center;
+	}
+<% end %>
+
+<% content_for :javascripts do %>
+<% end %>

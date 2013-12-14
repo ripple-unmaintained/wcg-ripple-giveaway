@@ -8,6 +8,18 @@ class Claim < ActiveRecord::Base
   scope :needs_rate, where('rate IS NULL')
   scope :has_rate, where('rate IS NOT NULL')
 
+  def self.failed_with_error(error)
+    self.where(transaction_status: error)
+  end
+
+  def self.failed_with_insuffiecient_xrp_but_over_current_reserve
+    self.where(transaction_status: 'tecNO_DST_INSUF_XRP').where('xrp_disbursed >= ?', ENV['RESERVE_AMOUNT'].to_i)
+  end
+
+  def self.failed_with_insuffiecient_xrp_and_under_current_reserve
+    self.where(transaction_status: 'tecNO_DST_INSUF_XRP').where('xrp_disbursed < ?', ENV['RESERVE_AMOUNT'].to_i)
+  end
+
   def user_ripple_address
     User.where(member_id: self.member_id).first.ripple_address
   end
@@ -16,6 +28,17 @@ class Claim < ActiveRecord::Base
     self.transaction_hash = confirmation['transaction_hash']
     self.transaction_status = confirmation['transaction_status']
     self.save
+  end
+
+  def duplicate_and_retry
+    duplicate = self.dup
+    duplicate.transaction_status = nil
+    duplicate.transaction_hash = nil
+    duplicate.save
+    if duplicate.persisted?
+      self.destroy
+      duplicate.enqueue
+    end
   end
 
   def enqueue
