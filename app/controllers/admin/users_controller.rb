@@ -1,5 +1,6 @@
-class UsersController < ApplicationController
-  http_basic_authenticate_with name: "ripple", password: "r!ppl3l@b5"
+class Admin::UsersController < AdminController
+  def index
+  end
 
   def show
     if params[:ripple_address]
