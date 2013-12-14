@@ -1,0 +1,35 @@
+<section class='search'>
+<p>
+	<form id="usernameSearch">
+		<input type='text' name='username'/>
+		<input type='submit' value='search username'/>
+	</form>
+</p>
+
+<p>
+	<form id="rippleAddressSearch">
+		<input type='text' name='ripple_address'/>
+		<input type='submit' value='search ripple address'/>
+	</form>
+</p>
+</section>
+
+<% content_for :javascripts do %>
+	<script>
+		$(function () {
+			$('#usernameSearch').on('submit', function (e){
+				e.preventDefault();
+				var username = $('input[name="username"]').val();
+				if (username == '') {  return false }
+				document.location.href = '/admin/users/by-username/'+encodeURIComponent(username);
+			});
+
+			$('#rippleAddressSearch').on('submit', function (e){
+				e.preventDefault();
+				var rippleAddress = $('input[name="ripple_address"]').val();
+				if (rippleAddress == '') {  return false }
+				document.location.href = '/admin/users/by-ripple-address/'+encodeURIComponent(rippleAddress);
+			});
+		});
+	</script>
+<% end %>
