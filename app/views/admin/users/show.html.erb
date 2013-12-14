@@ -1,8 +1,10 @@
+<div id='content'>
+<%= render 'partials/users_search' %>
+
+<section class="main-content">
 <% if !@user.present? %>
   <h1 style='text-align:center'>user not found</h1>
 <% else %>
-	<div id='content'>
-	<section class="main-content">
 	<h2>User</h2>
 	<table>
 		<thead>
@@ -15,6 +17,7 @@
 				<td>points paid</td>
 				<td>points claimed</td>
 				<td>xrp earned</td>
+				<td>total claims</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,6 +30,7 @@
 				<td><%= @user.points_paid %></td>
 				<td><%= @user.points_claimed %></td>
 				<td><%= @user.xrp_earned %></td>
+				<td><%= @user.claims.count %></td>
 			<tr/>
 		</tbody>
 	</table>
@@ -36,46 +40,47 @@
 		<thead>
 			<tr>
 				<td>id</td>
-				<td>member_id</td>
+				<td>created_at</td>
 				<td>rate</td>
 				<td>points</td>
-				<td>xrp disbursed</td>
+				<td>xrp</td>
 				<td>transaction hash</td>
 				<td>transaction_status</td>
-				<td>created_at</td>
-				<td>updated_at</td>
 			</tr>
 		</thead>
 		<tbody>
-			<% @claims.each do |claim| %>
+			<% @user.claims.each do |claim| %>
 				<tr>
-					<td><%= claim.username %></td>
-					<td><%= claim.ripple_address %></td>
+					<td><%= claim.id %></td>
 					<td><%= claim.created_at %></td>
-					<td><%= claim.initial_run_time %></td>
-					<td><%= claim.initial_points %></td>
-					<td><%= claim.points_paid %></td>
-					<td><%= claim.points_claimed %></td>
-					<td><%= claim.xrp_earned %></td>
+					<td><%= claim.rate.to_f %></td>
+					<td><%= claim.points.to_f %></td>
+					<td><%= claim.xrp_disbursed.to_f %></td>
+					<td><%= claim.transaction_hash %></td>
+					<td><%= claim.transaction_status %></td>
 				<tr/>
 			<% end %>
 		</tbody>
 	</table>
+<% end %>
+
 </section>
 </div>
 
+
+<% content_for :styles do %>
+	tr { 
+		border-bottom: 1px solid #ccc
+	}
+	
+	td {
+		padding: 5px 
+	}
+	.main-content, .main-content table, .search {
+		margin: 0 auto;
+		text-align:center;
+	}
 <% end %>
 
-	<% content_for :styles do %>
-		tr { 
-			border-bottom: 1px solid #ccc
-		}
-		
-		td {
-			padding: 5px 
-		}
-		.main-content, .main-content table {
-			margin: 0 auto;
-			text-align:center;
-		}
-	<% end %>
+<% content_for :javascripts do %>
+<% end %>
