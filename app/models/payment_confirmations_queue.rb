@@ -11,7 +11,7 @@ class PaymentConfirmationsQueue
 
   protected
 
-  def parse_uid(uid)
+  def self.parse_uid(uid)
     if uid.match('-')
       uid
     else
