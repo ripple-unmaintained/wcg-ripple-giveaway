@@ -43,7 +43,7 @@ class Claim < ActiveRecord::Base
 
   def rollover!
     if !self.rolled_over?
-      new_claim = Claim.where('transaction_status IS NULL').where(member_id: claim.member_id).first
+      new_claim = Claim.where('transaction_status IS NULL').where(member_id: self.member_id).first
       if new_claim
         new_claim.xrp_disbursed = new_claim.xrp_disbursed + self.xrp_disbursed
         new_claim.points = new_claim.points + self.points
