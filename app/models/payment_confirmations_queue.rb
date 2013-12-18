@@ -3,9 +3,13 @@ class PaymentConfirmationsQueue
 
   def self.process_confirmed_payments
     self.queue.poll do |message|
-      confirmation = JSON.parse(message.body)
-      claim = Claim.find(parse_uid(confirmation['unique_id']))
-      claim.confirm_payment(confirmation)
+      begin
+        confirmation = JSON.parse(message.body)
+        claim = Claim.find(parse_uid(confirmation['unique_id']))
+        claim.confirm_payment(confirmation)
+      rescue => e
+        puts "error processing claim: #{e}"
+      end
     end
   end
 
