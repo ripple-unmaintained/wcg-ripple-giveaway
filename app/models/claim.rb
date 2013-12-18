@@ -52,7 +52,7 @@ class Claim < ActiveRecord::Base
         self.rolled_over = true
         self.save
 
-        puts "rolled over #{bad_claim.xrp_disbursed} xrp to claim #{new_claim.id}"
+        puts "rolled over #{self.xrp_disbursed} xrp to claim #{new_claim.id}"
       end
     end
   end
