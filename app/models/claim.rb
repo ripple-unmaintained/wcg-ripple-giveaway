@@ -46,7 +46,6 @@ class Claim < ActiveRecord::Base
       new_claim = Claim.where('transaction_status IS NULL').where(member_id: self.member_id).first
       if new_claim
         new_claim.xrp_disbursed = new_claim.xrp_disbursed + self.xrp_disbursed
-        new_claim.points = new_claim.points + self.points
         new_claim.save
 
         self.rolled_over = true
