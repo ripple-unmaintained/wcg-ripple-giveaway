@@ -17,5 +17,7 @@ WcgGiveaway::Application.routes.draw do
   get 'stats/member/:member_id', to: 'stats#show'
   get 'stats', to: 'stats#index'
 
+  get 'faq', to: 'application#faq'
+
   root to: 'application#index'
 end
