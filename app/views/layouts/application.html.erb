@@ -97,6 +97,9 @@
   <!-- Start Wrap All -->
   <div class="wrap_all">
 
+		<% if flash[:notice] %>
+		<p class='flashNotice' style='font-weight:bold; font-size:150%;color:green;padding:2em;width:100%;text-align:center'><%= flash[:notice] %></p>
+		<% end %>
     <%= render 'partials/header' %>
 
     <!-- Main -->
