@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125185314) do
+ActiveRecord::Schema.define(version: 20131223224254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,15 @@ ActiveRecord::Schema.define(version: 20131125185314) do
     t.integer  "member_id",          limit: 8
     t.decimal  "rate"
     t.integer  "points",             limit: 8
-    t.integer  "xrp_disbursed",      limit: 8
+    t.decimal  "xrp_disbursed"
     t.string   "transaction_hash"
     t.string   "transaction_status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "rolled_over",                  default: false
   end
 
-  create_table "users", id: false, force: true do |t|
+  create_table "users", force: true do |t|
     t.string   "username"
     t.string   "ripple_address"
     t.integer  "member_id",         limit: 8
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20131125185314) do
     t.integer  "initial_points",    limit: 8
     t.integer  "total_points",      limit: 8
     t.integer  "total_time",        limit: 8
+    t.boolean  "funded",                      default: false
   end
 
   add_index "users", ["member_id"], name: "index_users_on_member_id", unique: true, using: :btree
