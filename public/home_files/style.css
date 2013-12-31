@@ -138,7 +138,7 @@ html, hmtl a {
 }
 
 #main.sticky-header-enabled {
-    padding-top: 100px;
+    /* padding-top: 100px; */
 }
 
 /* Boxed Layout */
@@ -7068,7 +7068,7 @@ html[xmlns] .slides {display: block;}
     }
 
     #main.sticky-header-enabled {
-        padding-top: 100px;
+        /* padding-top: 100px; */
     }
 
     header #logo a {
@@ -7276,7 +7276,7 @@ html[xmlns] .slides {display: block;}
     }
 
     #main.sticky-header-enabled {
-        padding-top: 100px;
+        /* padding-top: 100px; */
     }
 
     header #logo a {
@@ -7523,7 +7523,7 @@ html[xmlns] .slides {display: block;}
     }
 
     #main.sticky-header-enabled {
-        padding-top: 100px;
+        /* padding-top: 100px; */
     }
 
     header #logo a {
