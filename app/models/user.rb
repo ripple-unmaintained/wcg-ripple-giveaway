@@ -41,9 +41,6 @@ class User < ActiveRecord::Base
 
     if user.errors.empty?
       user.member_id = wcg_user.id
-      user.initial_run_time = wcg_user.run_time
-      user.initial_points = wcg_user.points
-
       user.save
     end
 
