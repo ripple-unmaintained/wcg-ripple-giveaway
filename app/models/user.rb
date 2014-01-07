@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :member_id, :ripple_address, :initial_run_time, :initial_points
+  validates_presence_of :member_id, :ripple_address
   validates_uniqueness_of :member_id
 
   def claims
