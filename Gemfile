@@ -14,7 +14,12 @@ gem 'pg'
 gem 'newrelic_rpm'
 
 # A concurrent web server is recommended for heroku
-gem 'unicorn'
+platforms :ruby do # linux
+  gem 'unicorn'
+end
+platforms :mswin do
+  # gems specific to windows
+end
 
 # Heroku requires logs to be streamed to STDOUT, this gem does that
 group :production do

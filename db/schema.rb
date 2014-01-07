@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20131223224254) do
     t.boolean  "rolled_over",                  default: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", id: false, force: true do |t|
     t.string   "username"
     t.string   "ripple_address"
     t.integer  "member_id",         limit: 8

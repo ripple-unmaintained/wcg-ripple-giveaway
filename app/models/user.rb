@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :member_id, :ripple_address, :initial_run_time, :initial_points
+  validates_presence_of :member_id, :ripple_address
   validates_uniqueness_of :member_id
 
   def claims
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     begin
       wcg_user = Wcg.verify_user(params[:username], params[:verification_code])
     rescue Exception => e
-
+      puts "EXCEPTION!!!", e
       case e
       when Wcg::InvalidUserNameOrVerificationCode
         user.errors.add(:verification_code, "does not match the WCG username")
