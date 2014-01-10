@@ -1,5 +1,3 @@
-<script type='text/template' id='registrationTemplate'>
-
   <section class="main-content border-btm-grey small-padding shadow-off" style="background-color: #3962ae;">
     <div class="container">
       <div class="row">
@@ -19,7 +17,7 @@
   <section class="main-content default-padding shadow-off">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
               <div class="special-heading textalignleft default" style="padding-bottom: 10px;">
@@ -55,14 +53,16 @@
                 </ol>
               </div>
           	</div>
-          </div>
           <div class="row">
             <div class="col-md-12">
               <div class="divider normal animated-content fade_in animate" style="margin-top: 60px; margin-bottom: 72px;"></div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+        </div>
+      </div>
+    </div>
+            <div class="col-md-4">
               <div class="special-heading textalignleft default animated-content fade_in animate" style="padding-bottom: 10px;">
                 <h2 class="fancy default"><span>2. Start Claiming XRP</span></h2>
               </div>
@@ -70,7 +70,7 @@
                 <h3 class="fancy default"><span>Connect your WCG account to your Ripple account</span></h3>
               </div>
               <div class="text-block animated-content fade_in animate">
-                <p class="regform_p">Once you start claiming XRP, all your compute time associated with your WCG username will be deposited into your Ripple public address. You will not be able to un-link these two accounts. We issue XRP once a day. Please wait 24 hours and then check your balance.</p>
+                <p class="">Once you start claiming XRP, all your compute time associated with your WCG username will be deposited into your Ripple public address. You will not be able to un-link these two accounts. We issue XRP once a day. Please wait 24 hours and then check your balance.</p>
               </div>
               <div class="blank_divider" style="height: 5px;"></div>
               <form method='post' action='/api/users' id='newUserForm'>
@@ -79,22 +79,22 @@
               			<p>
                       Ripple Public Address
                       <br>
-                      <input type="text" name="ripple_address" value="" size="40" aria-required="true">
+                      <input style='width:100%'type="text" name="ripple_address" value="" size="40" aria-required="true">
                     </p>
                     <p class='errors' id='rippleAddressErrors'>Please enter a valid ripple public address</p>
                       <div class="text-block animated-content fade_in animate">
-                        <p class="regform_p" style="font-size: 12px;">To find your public address, <a title="https://ripple.com/client" href="https://ripple.com/client" target="_blank">login to</a> or <a title="https://ripple.com/client/#/register" href="https://ripple.com/client/#/register" target="_blank">create</a> a Ripple account. Click on the “Receive” icon and copy your public address. Only enter addresses for which you have control.</p>
+                        <p class="" style="width:100%;font-size: 12px;">To find your public address, <a title="https://ripple.com/client" href="https://ripple.com/client" target="_blank">login to</a> or <a title="https://ripple.com/client/#/register" href="https://ripple.com/client/#/register" target="_blank">create</a> a Ripple account. Click on the “Receive” icon and copy your public address. Only enter addresses for which you have control.</p>
                       </div>
                     <p>
                       WCG Username
                       <br>
-                      <input type="text" name="username" size="40" aria-required="true">
+                      <input style='width:100%' type="text" name="username" size="40" aria-required="true">
                     </p>
                     <p class='errors' id='wcgUsernameErrors'></p>
                     <p>
                       WCG Verification Code
                       <br>
-                      <input type="text" name="verification_code" value="" size="40" aria-required="true">
+                      <input style='width:100%' type="text" name="verification_code" value="" size="40" aria-required="true">
                     </p>
                     <p class='errors' id='wcgVerificationCodeErrors'></p>
                     <div class="text-block animated-content fade_in animate">
@@ -109,9 +109,6 @@
               </div>
             </form>
           </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="main-content no-padding shadow-off">
@@ -138,8 +135,6 @@
       </div>
     </div>
   </section>
-
-</script>
 
 <script type='text/template' id='registrationTemplateChinese'>
   <section class="main-content border-btm-grey small-padding shadow-off" style="background-color: #3962ae;">
@@ -287,5 +282,4 @@
       </div>
     </div>
   </section>
-
 </script>
