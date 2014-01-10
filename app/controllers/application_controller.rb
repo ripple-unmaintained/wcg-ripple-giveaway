@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def invalid_username_or_verification
     render json: { error: 'username does not match verification code' }
   end
+
+  def index
+
+  end
 end
