@@ -195,7 +195,7 @@
   <%= render 'js_templates/register' %>
   <%= render 'js_templates/login' %>
   <%= render 'js_templates/my_stats' %>
-  <%= yield :javascripts %>
+  <%# yield :javascripts %>
   <script>
     $(function () {
       var language = "<%= session[:language] || 'english' %>";

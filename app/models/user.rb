@@ -22,29 +22,12 @@ class User < ActiveRecord::Base
     Wcg::get_team(cached: true).select {|member| member['id'] == self.member_id.to_s }[0]
   end
 
-  def self.create_from_username(params)
-    user = new(ripple_address: params[:ripple_address], username: params[:username])
-
-    begin
-      wcg_user = Wcg.verify_user(params[:username], params[:verification_code])
-    rescue Exception => e
-
-      case e
-      when Wcg::InvalidUserNameOrVerificationCode
-        user.errors.add(:verification_code, "does not match the WCG username")
-      when Wcg::UserNotMemberOfTeam
-        user.errors.add(:member_id, "is not part of the Ripple Labs team")
-      when Wcg::ServiceUnavailable
-        raise Wcg::ServiceUnavailable
-      end
+  def self.find_or_create(params)
+    if (user = User.find_by_member_id(params[:member_id]))
+      return user
+    else
+      return User.create(params) 
     end
-
-    if user.errors.empty?
-      user.member_id = wcg_user.id
-      user.save
-    end
-
-    user
   end
 
   def process_points(total_points)

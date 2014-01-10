@@ -167,7 +167,7 @@ $(function () {
     }
   }
 
-  $('#newUserForm').live('submit', handleNewUserFormSubmit);
+  //$('#newUserForm').live('submit', handleNewUserFormSubmit);
 
 
 
