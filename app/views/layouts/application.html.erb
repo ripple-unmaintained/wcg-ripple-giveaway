@@ -97,13 +97,13 @@
   <!-- Start Wrap All -->
   <div class="wrap_all">
 
-		<% if flash[:notice] %>
-		<p class='flashNotice' style='font-weight:bold; font-size:150%;color:green;padding:2em;width:100%;text-align:center'><%= flash[:notice] %></p>
-		<% end %>
     <%= render 'partials/header' %>
 
     <!-- Main -->
     <div id="main" class="normal-header-enabled">
+      <% if flash[:alert] %>
+      <p class='flashNotice' style='font-weight:bold; font-size:150%;color:green;padding:2em;width:100%;text-align:center'><%= flash[:alert] %></p>
+      <% end %>
     	<%= yield %>
     </div>
     <!-- End Main -->
@@ -190,18 +190,6 @@
 <!-- End Google Analytics -->
   <script src='/ripple-0.7.30-min.js'></script>
   <%= javascript_include_tag "application" %>
-  <%= yield :templates %>
-  <%= render 'js_templates/home' %>
-  <%= render 'js_templates/register' %>
-  <%= render 'js_templates/login' %>
-  <%= render 'js_templates/my_stats' %>
-  <%# yield :javascripts %>
-  <script>
-    $(function () {
-      var language = "<%= session[:language] || 'english' %>";
-      $(document).trigger('change:language', language);
-      $('#languageSelect').val(language)
-    });
-  </script>
+  <%= yield :javascripts %>
 </body>
 </html>

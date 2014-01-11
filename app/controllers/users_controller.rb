@@ -13,10 +13,8 @@ class UsersController < ApplicationController
       }) 
       redirect_to "/stats/member/#{@user.member_id}"
     else
-      render json: { 
-        success: false, 
-        error: "The credentials provided do not belong to a Ripple Labs WCG team member" 
-      }
+      flash[:notice] = { username: "The credentials provided do not belong to a Ripple Labs WCG team member"}
+      redirect_to :back
     end
   end
 

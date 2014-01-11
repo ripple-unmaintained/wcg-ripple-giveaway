@@ -85,6 +85,9 @@
                       <div class="text-block animated-content fade_in animate">
                         <p class="" style="width:100%;font-size: 12px;">To find your public address, <a title="https://ripple.com/client" href="https://ripple.com/client" target="_blank">login to</a> or <a title="https://ripple.com/client/#/register" href="https://ripple.com/client/#/register" target="_blank">create</a> a Ripple account. Click on the “Receive” icon and copy your public address. Only enter addresses for which you have control.</p>
                       </div>
+                    <% if flash[:notice] %>
+                      <p style='color:red'><%= flash[:notice] %>
+                    <% end %>
                     <p>
                       WCG Username
                       <br>
@@ -282,3 +285,18 @@
     </div>
   </section>
 </script>
+
+  <% content_for :javascripts do %>
+  <script>
+    $(function(){
+      $('form').on('submit', function(e) {
+        rippleAddress = $("input[name='ripple_address']").val()
+        if (!validateRippleAddress(ripple, rippleAddress)) {
+          $("#rippleAddressErrors").show()
+          return false
+        }
+      })
+    })
+  </script>
+  <% end %>
+
