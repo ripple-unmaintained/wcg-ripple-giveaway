@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   rescue_from Wcg::InvalidUserNameOrVerificationCode, with: :invalid_username_or_verification
 
   def service_unavailable
-    render json: { error: 'service unavailable' }
+    flash[:alert] = "WCG is currently unavailable for their stats update. Please register in a few hours"
+    redirect_to :back
   end
 
   def parameter_missing(error)
@@ -12,10 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
   def invalid_username_or_verification
-    render json: { error: 'username does not match verification code' }
+    flash[:notice] = { username: 'username does not match verification code' }
+    redirect_to :back
   end
 
   def index
-
+    @total_xrp = REDIS.get("total_xrp")
+    @total_hours = REDIS.get("total_hours") 
+    @xrp_today = ENV['NEXT_XRP_CLAIM_TOTAL']
   end
 end

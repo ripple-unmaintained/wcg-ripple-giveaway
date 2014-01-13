@@ -27,21 +27,12 @@
                   <li id="menu-item-408" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-406 current_page_item menu-item-408">
                       <a href="/">Home</a>
                   </li>
-                  <% if session[:user] %>
-                  <% else %>
                   <li id="menu-item-459" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
                     <a href="/register">Register</a>
                   </li>
-                  <% end %>
                   <li id="menu-item-600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-600">
-                      <a href="/my-stats">My Stats</a>
+                      <a href="/stats">My Stats</a>
                   </li>
-                  <% if session[:user] %>
-                  <li id="menu-item-459" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                    <a href="/logout">Logout</a>
-                  </li>
-                  <% else %>
-                  <% end %>
                 </ul>
             </div>
         </div>
