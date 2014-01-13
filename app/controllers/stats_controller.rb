@@ -5,7 +5,7 @@ class StatsController < ApplicationController
       redirect_to "/stats/member/#{member_id}"
     else
       flash[:notice] = "No users with username #{params[:username]} is registered"
-      redirect_to '/'
+      redirect_to '/register'
     end
   end
 
