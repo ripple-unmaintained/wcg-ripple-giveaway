@@ -2,6 +2,12 @@
 //= require backbone-min
 //= require_self
 
+function validateRippleAddress(ripple, rippleAddress) {
+  return ripple.UInt160.from_json(rippleAddress).is_valid()
+}
+
+window.validateRippleAddress = validateRippleAddress
+
 _.templateSettings = {
   interpolate: /\{\{\=(.+?)\}\}/g,
   evaluate: /\{\{(.+?)\}\}/g
@@ -167,7 +173,7 @@ $(function () {
     }
   }
 
-  $('#newUserForm').live('submit', handleNewUserFormSubmit);
+  //$('#newUserForm').live('submit', handleNewUserFormSubmit);
 
 
 

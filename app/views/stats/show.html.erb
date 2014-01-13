@@ -1,57 +1,36 @@
 <div id="content">
+  <h2 style='text-align:center'>User stats for <%= @member.username %> -- member #<%= @member.member_id %></h2>
+  
+  <div class='row' style='text-align: center;margin: 0 auto'>
+    <ul>
+      <li>Total XRP Earned: <%= @claims.sum(:xrp_disbursed) %></li>
+      <li>Total Points Earned: <%= @claims.sum(:points) %></li>
+      <li>Registered on <%= @member.created_at.strftime("%b %d, %Y") %></li>
+    </ul>
+  </div>
+  <hr/>
+  <h3 style='text-align:center'>XRP Payouts to <%= @member.username %></h3>
+  <table style='width:80%; margin: 0 auto; margin-top:20px' class='table table-striped'>
+    <thead>
+      <tr>
+        <td>created at</td>
+        <td>xrp amount</td>
+        <td>points</td>
+        <td>rate points/xrp</td>
+        <td>ripple status</td>
+      </tr>
+    <thead>
+    <tbody>
+    <% @claims.each do |claim| %>
+      <tr>
+        <td><%= claim.created_at.strftime("%b %d, %Y") %></td>
+        <td><%= claim.xrp_disbursed %></td>
+        <td><%= claim.points %></td>
+        <td><%= claim.rate %></td>
+        <td><%= link_to claim.transaction_status, "http://ripple.com/graph/##{claim.transaction_hash}" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  <table>
 </div>
 
-<% content_for :javascripts do %>
-<script>
-  var myData, chinese = false;
-
-  $ = jQuery;
-  $(function () {
-
-    function showHeader() {
-      $('#content').html(_.template($('#statsPageHeaderTemplate').html(),{}));
-    }
-
-    function displayMyData (data, chinese) {
-      $('.ajaxLoader').hide();
-
-      $('.headerRight').html(data.user.name);
-      var params = {
-        username: data.user.name
-      }
-      _.extend(params, data.global);
-      params.personalHours = Math.round(data.user.run_time / 60.0 / 60.0);
-      params.personalXrp = data.user.xrp;
-      if (chinese) {
-        $('#content').html(_.template($('#statsPageTemplateChinese').html(), params));
-      } else {
-        $('#content').html(_.template($('#statsPageTemplate').html(), params));
-      }
-
-      $('.ajaxLoader').hide();
-    }
-
-    showHeader();
-    $.getJSON('/api/stats', function(data) {
-      myData = data;
-      $('.ajaxLoader').hide();
-      if (data.error) {
-        $('.main-content').after($('<p/>').text('Your stats are currently unavailable because WCG statistics are being updated. Please try again later.').css('text-align','center'));
-      } else {
-        displayMyData(data, chinese)
-      }
-    });
-
-    $(document).on('change:language', function(event, language) {
-      if (language == 'chinese') {
-        chinese = true;
-        displayMyData(myData, chinese)
-      } else {
-        chinese = false;
-        displayMyData(myData, chinese)
-      }
-    })
-
-  });
-</script>
-<% end %>
