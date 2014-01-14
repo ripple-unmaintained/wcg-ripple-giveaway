@@ -13,7 +13,7 @@ class StatsController < ApplicationController
     @member = User.find_by_member_id(params[:member_id])
     if @member
       @claims = @member.claims
-      @claims.map |claim| do
+      @claims.map do |claim|
         case claim.transaction_status
         when 'tesSUCCESS'
           claim.transaction_status = 'success'
