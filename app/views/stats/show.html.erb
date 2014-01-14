@@ -5,6 +5,7 @@
     <ul>
       <li>Total XRP Earned: <%= @claims.sum(:xrp_disbursed) %></li>
       <li>Total Points Earned: <%= @claims.sum(:points) %></li>
+      <li>Ripple Address : <%= @member.ripple_address %></li>
       <li>Registered on <%= @member.created_at.strftime("%b %d, %Y") %></li>
     </ul>
   </div>
@@ -13,11 +14,11 @@
   <table style='width:80%; margin: 0 auto; margin-top:20px' class='table table-striped'>
     <thead>
       <tr>
-        <td>created at</td>
+        <td>date</td>
         <td>xrp amount</td>
         <td>points</td>
         <td>rate xpr/point</td>
-        <td>ripple status</td>
+        <td>status</td>
       </tr>
     <thead>
     <tbody>
