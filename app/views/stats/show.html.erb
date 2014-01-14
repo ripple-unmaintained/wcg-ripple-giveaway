@@ -24,10 +24,10 @@
     <% @claims.each do |claim| %>
       <tr>
         <td><%= claim.created_at.strftime("%b %d, %Y") %></td>
-        <td><%= claim.xrp_disbursed %></td>
+        <td><%= claim.xrp_disbursed.round(6) %></td>
         <td><%= claim.points %></td>
         <td><%= claim.rate %></td>
-        <td><%= link_to claim.transaction_status, "http://ripple.com/graph/##{claim.transaction_hash}" %></td>
+        <td><a target='_blank' href='<%= "http://ripple.com/graph/##{claim.transaction_hash}" %>'><%= claim.transaction_status %></a></td>
       </tr>
     <% end %>
     </tbody>
