@@ -13,6 +13,15 @@ class StatsController < ApplicationController
     @member = User.find_by_member_id(params[:member_id])
     if @member
       @claims = @member.claims
+      @claims.map |claim|
+        case claim.transaction_status
+        when 'tesSUCCESS'
+          claim.transaction_status = 'success'
+        when 'submitted'
+        else 
+          claim.transaction_status = 'failed'
+        end
+      end
     else
       flash[:notice] = "No member has registered with id #{params[:member_id]}"
   	  redirect_to '/'
