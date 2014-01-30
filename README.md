@@ -36,4 +36,5 @@ amount to everyone who has exceeded the eight hour threshold in the current peri
     HTTPARTY_TIMEOUT
     TEAM_ID
     BASIC_AUTH_PASSWORD
+    SECRET_KEY_BASE
     
