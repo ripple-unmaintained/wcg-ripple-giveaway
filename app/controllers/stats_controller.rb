@@ -12,8 +12,7 @@ class StatsController < ApplicationController
   def show
     @member = User.find_by_member_id(params[:member_id])
     if @member
-      @claims = @member.claims
-      @claims.sort!{|a,b| b.created_at <=> a.created_at}
+      @claims = Claim.where(member_id: @member.member_id).order("created_at DESC")
       @claims.map do |claim|
         case claim.transaction_status
         when 'tesSUCCESS'
