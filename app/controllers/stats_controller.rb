@@ -13,6 +13,7 @@ class StatsController < ApplicationController
     @member = User.find_by_member_id(params[:member_id])
     if @member
       @claims = @member.claims
+      @claims.sort!{|a,b| b.created_at <=> a.created_at}
       @claims.map do |claim|
         case claim.transaction_status
         when 'tesSUCCESS'
