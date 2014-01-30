@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   def index
     @total_xrp = REDIS.get("total_xrp")
     @total_hours = REDIS.get("total_hours") 
-    @xrp_today = ENV['NEXT_XRP_CLAIM_TOTAL']
+    @xrp_today = ENV['NEXT_XRP_CLAIM_TOTAL'] || '0'
   end
 end
