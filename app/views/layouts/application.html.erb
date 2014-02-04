@@ -128,7 +128,7 @@
                 </ul>
               </nav>
               <!-- End Social Icons -->
-              <select style='float:right; font-size:12px; margin: 15px 15px 0 15px;' id='languageSelect'>
+              <select style='float:right; font-size:12px; margin: 15px 20px 0 15px;' id='languageSelect'>
                 <option value='english'>English</option>
                 <option value='chinese'>Chinese</option>
               </select>
@@ -190,6 +190,11 @@
 <!-- End Google Analytics -->
   <script src='/ripple-0.7.30-min.js'></script>
   <%= javascript_include_tag "application" %>
+  <%= yield :templates %>
+  <%= render 'js_templates/home' %>
+  <%= render 'js_templates/register' %>
+  <%= render 'js_templates/login' %>
+  <%= render 'js_templates/my_stats' %>
   <%= yield :javascripts %>
 </body>
 </html>

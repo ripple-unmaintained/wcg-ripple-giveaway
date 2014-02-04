@@ -22,4 +22,7 @@ class ApplicationController < ActionController::Base
     @total_hours = REDIS.get("total_hours") 
     @xrp_today = ENV['NEXT_XRP_CLAIM_TOTAL'] || '0'
   end
+
+  def faq
+  end
 end
