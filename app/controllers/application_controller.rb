@@ -1,3 +1,5 @@
+require "#{Rails.root}/lib/fixnum.rb"
+
 class ApplicationController < ActionController::Base
   rescue_from Wcg::ServiceUnavailable, with: :service_unavailable
   rescue_from ActionController::ParameterMissing, with: lambda {|e| parameter_missing(e) }
@@ -20,6 +22,9 @@ class ApplicationController < ActionController::Base
   def index
     @total_xrp = REDIS.get("total_xrp")
     @total_hours = REDIS.get("total_hours") 
-    @xrp_today = ENV['NEXT_XRP_CLAIM_TOTAL'] || '0'
+    @xrp_today = (ENV['NEXT_XRP_CLAIM_TOTAL'] || '0').to_i.with_delimiter
+  end
+
+  def faq
   end
 end
