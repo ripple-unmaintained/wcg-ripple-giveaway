@@ -6974,6 +6974,17 @@ html[xmlns] .slides {display: block;}
 /*-----------------------------------------------------------------------------------*/
 
 @media (min-width: 992px) and (max-width: 1199px) {
+/* sean custom */
+    /* register */
+    .register-content .col-m-6:nth-of-type(1){
+	    padding-right: 45px;
+  		border-right: 3px solid #EBEDEF;
+  	}
+    .register-content .col-m-6:nth-of-type(2){
+	    padding-left: 45px;
+    }
+/* end sean custom */
+
     .wrap_all.boxed {
         width: 90%;
     }
@@ -6984,24 +6995,24 @@ html[xmlns] .slides {display: block;}
         padding-right: 30px;
     }
 
-	#navigation-mobile {
-		display: none !important;	
-	}
-	
-	.single-people.col-md-3,
-	.single-people.col-md-4,
-	.item-project.col-md-3,
-	.item-project.col-md-4,
-	.masonry-blog article.col-md-3,
-	.masonry-blog article.col-md-4 {
-		width: 33.3333%;
-	}
-	
-	.single-people.col-md-6,
-	.item-project.col-md-6,
-	.masonry-blog article.col-md-6 {
-		width: 50%;
-	}
+  	#navigation-mobile {
+  		display: none !important;	
+  	}
+  	
+  	.single-people.col-md-3,
+  	.single-people.col-md-4,
+  	.item-project.col-md-3,
+  	.item-project.col-md-4,
+  	.masonry-blog article.col-md-3,
+  	.masonry-blog article.col-md-4 {
+  		width: 33.3333%;
+  	}
+  	
+  	.single-people.col-md-6,
+  	.item-project.col-md-6,
+  	.masonry-blog article.col-md-6 {
+  		width: 50%;
+  	}
 
     /* Map */
 
@@ -7030,7 +7041,14 @@ html[xmlns] .slides {display: block;}
       display: none;
     }
     
+    
     /* register */
+    .register-content .col-m-6:nth-of-type(1){
+  		border-right: none;
+  	}
+    .register-content .col-m-6:nth-of-type(2){
+    }
+    
     input[type='text'],
     .wpcf7 input {
         width: 80%;
