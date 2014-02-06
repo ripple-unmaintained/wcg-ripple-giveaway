@@ -35,3 +35,6 @@ amount to everyone who has exceeded the eight hour threshold in the current peri
     REDISTOGO_URL
     HTTPARTY_TIMEOUT
     TEAM_ID
+    BASIC_AUTH_PASSWORD
+    SECRET_KEY_BASE
+    

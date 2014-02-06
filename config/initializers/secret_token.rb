@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-WcgGiveaway::Application.config.secret_key_base = '676061367dcc824e90a7e0f7e518254af7f986e1dd7894dbd1f6f831b63ae0cfcb47bf027e563b8eecd2b37f5769b46e137dfe7f8c855ac2e5e2e08b358c0be1'
+WcgGiveaway::Application.config.secret_key_base = ENV['SECRET_KEY_BASE'] || '4288377139599e6f0eb9fb955c2cd4d98d93078dde001b97a78de8c16d27b533fb0b8f9aecf1e57683bf36d6ccd59225a085aba073b4ba982db9c796d63018a5'

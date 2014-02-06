@@ -11,7 +11,7 @@ task :create_pending_claims => :environment do
     # subtracting the amount of points they had when they registered
     wcg_team_member = team.find_member_by_id(user.member_id)
     if wcg_team_member
-      points_earned = wcg_team_member.points - (user.initial_points || 0)
+      points_earned = wcg_team_member.points
 
       if points_earned > 0
 
