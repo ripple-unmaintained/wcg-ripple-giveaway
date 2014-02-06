@@ -46,6 +46,16 @@
 -------------------------------------------------------------------------------------*/
 
 /* sean custom */
+    
+    /* register */
+    .register-content .col-md-6:nth-of-type(1){
+	    padding-right: 45px;
+	    border-right: 3px solid #EBEDEF;
+    }
+    .register-content .col-md-6:nth-of-type(2){
+	    padding-left: 45px;
+	  }
+	  
     input[type='text'],
     .wpcf7 input {
         -webkit-box-sizing: border-box;
@@ -6975,14 +6985,7 @@ html[xmlns] .slides {display: block;}
 
 @media (min-width: 992px) and (max-width: 1199px) {
 /* sean custom */
-    /* register */
-    .register-content .col-m-6:nth-of-type(1){
-	    padding-right: 45px;
-  		border-right: 3px solid #EBEDEF;
-  	}
-    .register-content .col-m-6:nth-of-type(2){
-	    padding-left: 45px;
-    }
+
 /* end sean custom */
 
     .wrap_all.boxed {
@@ -7024,6 +7027,15 @@ html[xmlns] .slides {display: block;}
 @media (min-width: 768px) and (max-width: 991px) {
 
 /* sean custom */  
+    #menu {
+        display: none;
+    }
+
+    #mobile-nav {
+        display: block;
+        float: right;
+    }
+
      /* home */
     .home_page .main-content.masthead {
     }
@@ -7043,15 +7055,16 @@ html[xmlns] .slides {display: block;}
     
     
     /* register */
-    .register-content .col-m-6:nth-of-type(1){
-  		border-right: none;
-  	}
-    .register-content .col-m-6:nth-of-type(2){
+    .register-content .col-md-6:nth-of-type(1){
+      border-right: none;
+      padding-bottom: 60px;
+      margin-bottom: 72px;
+      border-bottom: 3px solid #EBEDEF;
     }
     
     input[type='text'],
     .wpcf7 input {
-        width: 80%;
+      width: 80%;
     }
     .regform_p {
       width: 80%;
@@ -7067,40 +7080,40 @@ html[xmlns] .slides {display: block;}
     /* Boxed Layout */
 
     .wrap_all.boxed {
-        width: 90%;
+      width: 90%;
     }
 
     .wrap_all.boxed .container {
-        max-width: none;
-        padding-left: 30px;
-        padding-right: 30px;
+      max-width: none;
+      padding-left: 30px;
+      padding-right: 30px;
     }
 	
 	/* Header */
 	
     header,
     header.sticky-header {
-        height: 100px;
-        border-bottom: 3px solid #EBEDEF;
-        z-index: 20;
+      height: 100px;
+      border-bottom: 3px solid #EBEDEF;
+      z-index: 20;
     }
 
     #main.sticky-header-enabled {
-        /* padding-top: 100px; */
+      /* padding-top: 100px; */
     }
 
     header #logo a {
-        /* font-size: 24px; */
-        line-height: 100px;
+      /* font-size: 24px; */
+      line-height: 100px;
     }
     header .col-md-3 {
-        float: left;
-        width: 50%;
+      float: left;
+      width: 50%;
     }
 
     header .col-md-9 {
-        float: left;
-        width: 50%;
+      float: left;
+      width: 50%;
     }
 	
 	/* Portfolio and Team Columns */
@@ -7246,6 +7259,13 @@ html[xmlns] .slides {display: block;}
     }
     
     /* register */
+    .register-content .col-md-6:nth-of-type(1){
+      border-right: none;
+      padding-bottom: 40px;
+      margin-bottom: 48px;
+      border-bottom: 3px solid #EBEDEF;
+    }
+    
     input[type='text'],
     .wpcf7 input {
         width: 80%;
@@ -7479,6 +7499,12 @@ html[xmlns] .slides {display: block;}
     .menu-nav.open .menu-icon {
       z-index: 21;
     }
+    
+    /* body */
+    .default-padding {
+      padding: 40px 0 40px;
+    }
+    
     /* header */
     header .col-md-3 {
       width: 50%;
@@ -7489,6 +7515,15 @@ html[xmlns] .slides {display: block;}
     header #logo a img {
       height: 40px;
     }
+    
+    /* register */
+    .register-content .col-md-6:nth-of-type(1){
+      border-right: none;
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+      border-bottom: 3px solid #EBEDEF;
+    }
+    
     /* forms */
     input[type='text'],
     .wpcf7 input {
@@ -7497,6 +7532,7 @@ html[xmlns] .slides {display: block;}
     .regform_p {
         width: 100%;
     }
+    
     /* footer */
     #footer-credits .col-md-4 {
       width:100%;
