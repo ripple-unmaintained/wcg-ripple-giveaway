@@ -1,5 +1,10 @@
 <div id="content">
   <h2 style='text-align:center'>User stats for <%= @member.username %> -- member #<%= @member.member_id %></h2>
+  <p>Some transactions fail the first time. ComputingforGood will continue attempting the transaction until it succeeds. Please wait a few days and visit this page again.</p>
+
+<p>If you have a wallet with 0 XRP: If your first payment(s) fail, it is probably because your wallet is unfunded. A wallet must contain 20 XRP to be “active.” Payments before your wallet reaches 20 XRP will show as failed. Once you’ve built up over 20 XRP, these failed XRP payments will be transferred in one payout, which will include all prior payouts. </p>
+
+<p>Known issues: On January 14, transaction statuses are shown as “Submitted.” The payment was in fact successful.</p>
   
   <div class='row' style='text-align: center;margin: 0 auto'>
     <ul>
