@@ -38,4 +38,3 @@ amount to everyone who has exceeded the eight hour threshold in the current peri
     BASIC_AUTH_PASSWORD
     SECRET_KEY_BASE
     
-
