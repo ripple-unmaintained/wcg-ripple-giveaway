@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/stevenzeiler/wcg-gem.git
-  revision: 5ea9cef06664cceb004d9f8d765a3e503b61e6f7
+  revision: d3b65c6def6d5b8b6e2bda011edaed306a477774
   specs:
-    wcg (0.0.1)
+    wcg (0.0.2)
       httparty
       nokogiri
 
