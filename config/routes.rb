@@ -10,9 +10,6 @@ WcgGiveaway::Application.routes.draw do
 		get 'users/by-username/:username', to: 'users#show'
   end
 
-  resources :users, only: :create
-  get 'register', to: 'users#new'
-
   get 'stats/username', to: 'stats#username'
   get 'stats/member/:member_id', to: 'stats#show'
   get 'stats', to: 'stats#index'
@@ -21,3 +18,4 @@ WcgGiveaway::Application.routes.draw do
 
   root to: 'application#index'
 end
+
